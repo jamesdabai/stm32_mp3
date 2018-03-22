@@ -1,0 +1,8 @@
+---- xmp3_MULSHIFT32 Matches (7 in 2 files) ----
+asmmisc.s (real\arm) line 41 : ; int xmp3_MULSHIFT32(int x, int y)
+asmmisc.s (real\arm) line 42 : 	EXPORT xmp3_MULSHIFT32
+asmmisc.s (real\arm) line 51 :     ; .global xmp3_MULSHIFT32
+asmmisc.s (real\arm) line 53 : xmp3_MULSHIFT32 PROC
+assembly.h (real) line 190 : #define MULSHIFT32	xmp3_MULSHIFT32
+assembly.h (real) line 224 : #define MULSHIFT32	xmp3_MULSHIFT32
+assembly.h (real) line 252 : #define MULSHIFT32	xmp3_MULSHIFT32

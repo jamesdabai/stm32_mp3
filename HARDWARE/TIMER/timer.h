@@ -1,0 +1,18 @@
+#ifndef _TIMER_H
+#define _TIMER_H
+#include "sys.h"
+//////////////////////////////////////////////////////////////////////////////////	 
+//STM32F4工程模板-库函数版本
+//淘宝店铺：http://mcudev.taobao.com							  
+////////////////////////////////////////////////////////////////////////////////// 	
+
+void TIM3_Int_Init(u16 arr,u16 psc);
+
+void PA0_init(void);
+void PA0_out_high(void);
+void PA0_out_low(void);
+
+
+
+
+#endif

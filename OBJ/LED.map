@@ -1,0 +1,289 @@
+ARM Linker, 5.03 [Build 76] [MDK-ARM Standard]
+
+==============================================================================
+
+Section Cross References
+
+    main.o(.text) refers to delay.o(.text) for delay_init
+    main.o(.text) refers to led.o(.text) for LED_Init
+    main.o(.text) refers to stm32f4xx_gpio.o(.text) for GPIO_ResetBits
+    system_stm32f4xx.o(.text) refers to system_stm32f4xx.o(.data) for SystemCoreClock
+    led.o(.text) refers to stm32f4xx_rcc.o(.text) for RCC_AHB1PeriphClockCmd
+    led.o(.text) refers to stm32f4xx_gpio.o(.text) for GPIO_Init
+    delay.o(.text) refers to misc.o(.text) for SysTick_CLKSourceConfig
+    delay.o(.text) refers to delay.o(.data) for fac_us
+    usart.o(.rev16_text) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    usart.o(.revsh_text) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    usart.o(.text) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    usart.o(.text) refers to stm32f4xx_rcc.o(.text) for RCC_AHB1PeriphClockCmd
+    usart.o(.text) refers to stm32f4xx_gpio.o(.text) for GPIO_PinAFConfig
+    usart.o(.text) refers to stm32f4xx_usart.o(.text) for USART_Init
+    usart.o(.text) refers to misc.o(.text) for NVIC_Init
+    usart.o(.text) refers to usart.o(.data) for USART_RX_STA
+    usart.o(.text) refers to usart.o(.bss) for USART_RX_BUF
+    usart.o(.bss) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    usart.o(.data) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    startup_stm32f40_41xxx.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32f40_41xxx.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32f40_41xxx.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32f40_41xxx.o(RESET) refers to startup_stm32f40_41xxx.o(STACK) for __initial_sp
+    startup_stm32f40_41xxx.o(RESET) refers to startup_stm32f40_41xxx.o(.text) for Reset_Handler
+    startup_stm32f40_41xxx.o(RESET) refers to stm32f4xx_it.o(.text) for NMI_Handler
+    startup_stm32f40_41xxx.o(RESET) refers to usart.o(.text) for USART1_IRQHandler
+    startup_stm32f40_41xxx.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_stm32f40_41xxx.o(.text) refers to system_stm32f4xx.o(.text) for SystemInit
+    startup_stm32f40_41xxx.o(.text) refers to __main.o(!!!main) for __main
+    startup_stm32f40_41xxx.o(.text) refers to startup_stm32f40_41xxx.o(HEAP) for Heap_Mem
+    startup_stm32f40_41xxx.o(.text) refers to startup_stm32f40_41xxx.o(STACK) for Stack_Mem
+    stm32f4xx_gpio.o(.text) refers to stm32f4xx_rcc.o(.text) for RCC_AHB1PeriphResetCmd
+    stm32f4xx_rcc.o(.text) refers to stm32f4xx_rcc.o(.data) for APBAHBPrescTable
+    stm32f4xx_syscfg.o(.text) refers to stm32f4xx_rcc.o(.text) for RCC_APB2PeriphResetCmd
+    stm32f4xx_usart.o(.text) refers to stm32f4xx_rcc.o(.text) for RCC_APB2PeriphResetCmd
+    os_app_hooks.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_app_hooks.o(.text) refers to os_var.o(.data) for OS_AppTaskCreateHookPtr
+    app.o(.text) refers to bsp.o(.text) for BSP_Init
+    app.o(.text) refers to cpu_core.o(.text) for CPU_Init
+    app.o(.text) refers to os_cpu_c.o(.text) for OS_CPU_SysTickInit
+    app.o(.text) refers to lib_mem.o(.text) for Mem_Init
+    app.o(.text) refers to lib_math.o(.text) for Math_Init
+    app.o(.text) refers to os_stat.o(.text) for OSStatTaskCPUUsageInit
+    app.o(.text) refers to os_time.o(.text) for OSTimeDlyHMSM
+    app.o(.text) refers to bsp_int.o(.text) for BSP_IntDisAll
+    app.o(.text) refers to os_core.o(.text) for OSInit
+    app.o(.text) refers to os_task.o(.text) for OSTaskCreate
+    app.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_TickRate_Hz
+    app.o(.text) refers to app.o(.bss) for AppTaskStartStk
+    bsp.o(.text) refers to bsp_periph.o(.text) for BSP_PeriphEn
+    bsp.o(.text) refers to stm32f4xx_gpio.o(.text) for GPIO_Init
+    bsp.o(.text) refers to bsp_int.o(.text) for BSP_IntInit
+    bsp.o(.text) refers to stm32f4xx_rcc.o(.text) for RCC_GetClocksFreq
+    bsp.o(.text) refers to cpu_core.o(.text) for CPU_TS_TmrFreqSet
+    bsp.o(.text) refers to lludivv7m.o(.text) for __aeabi_uldivmod
+    bsp_int.o(.text) refers to cpu_c.o(.text) for CPU_IntSrcDis
+    bsp_int.o(.text) refers to cpu_a.o(.text) for CPU_IntDis
+    bsp_int.o(.text) refers to os_core.o(.text) for OSIntEnter
+    bsp_int.o(.text) refers to bsp_int.o(.bss) for BSP_IntVectTbl
+    bsp_periph.o(.text) refers to bsp.o(.text) for BSP_CPU_ClkFreq
+    cpu_core.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    cpu_core.o(.text) refers to lib_mem.o(.text) for Mem_Clr
+    cpu_core.o(.text) refers to bsp.o(.text) for CPU_TS_TmrInit
+    cpu_core.o(.text) refers to lib_str.o(.text) for Str_Copy_N
+    cpu_core.o(.text) refers to cpu_core.o(.bss) for CPU_Name
+    cpu_core.o(.text) refers to cpu_core.o(.data) for CPU_TS_TmrFreq_Hz
+    cpu_core.o(.text) refers to cpu_core.o(.constdata) for CPU_CntLeadZerosTbl
+    cpu_c.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    lib_math.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    lib_math.o(.text) refers to lib_math.o(.data) for Math_RandSeedCur
+    lib_mem.o(.text) refers to lib_mem_a.o(.text) for Mem_Copy
+    lib_mem.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    lib_mem.o(.text) refers to lib_mem.o(.bss) for Mem_PoolHeap
+    lib_mem.o(.text) refers to lib_mem.o(.data) for Mem_PoolTbl
+    lib_str.o(.text) refers to lib_ascii.o(.text) for ASCII_ToLower
+    lib_str.o(.text) refers to lib_str.o(.constdata) for Str_MultOvfThTbl_Int32U
+    os_cpu_a.o(CODE) refers (Special) to os_core.o(.text) for OSIntExit
+    os_cpu_a.o(CODE) refers (Special) to os_var.o(.data) for OSRunning
+    os_cpu_a.o(CODE) refers to os_cpu_c.o(.data) for OS_CPU_ExceptStkBase
+    os_cpu_a.o(CODE) refers to os_cpu_c.o(.text) for OSTaskSwHook
+    os_cpu_c.o(.text) refers to os_cpu_a.o(CODE) for OS_CPU_FP_Reg_Push
+    os_cpu_c.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_cpu_c.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_cpu_c.o(.text) refers to os_time.o(.text) for OSTimeTick
+    os_cpu_c.o(.text) refers to os_core.o(.text) for OSIntExit
+    os_cpu_c.o(.text) refers to os_var.o(.data) for OS_AppIdleTaskHookPtr
+    os_cpu_c.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_ISRStkBasePtr
+    os_cpu_c.o(.text) refers to os_cpu_c.o(.data) for OS_CPU_ExceptStkBase
+    os_cpu_c.o(.text) refers to os_task.o(.text) for OS_TaskReturn
+    os_cfg_app.o(.constdata) refers to os_cfg_app.o(.bss) for OSCfg_IdleTaskStk
+    os_core.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_core.o(.text) refers to os_cpu_c.o(.text) for OSIdleTaskHook
+    os_core.o(.text) refers to os_task.o(.text) for OSTaskCreate
+    os_core.o(.text) refers to os_prio.o(.text) for OS_PrioInit
+    os_core.o(.text) refers to os_flag.o(.text) for OS_FlagInit
+    os_core.o(.text) refers to os_mem.o(.text) for OS_MemInit
+    os_core.o(.text) refers to os_msg.o(.text) for OS_MsgPoolInit
+    os_core.o(.text) refers to os_mutex.o(.text) for OS_MutexInit
+    os_core.o(.text) refers to os_q.o(.text) for OS_QInit
+    os_core.o(.text) refers to os_sem.o(.text) for OS_SemInit
+    os_core.o(.text) refers to os_tick.o(.text) for OS_TickTaskInit
+    os_core.o(.text) refers to os_stat.o(.text) for OS_StatTaskInit
+    os_core.o(.text) refers to os_tmr.o(.text) for OS_TmrInit
+    os_core.o(.text) refers to os_dbg.o(.text) for OS_Dbg_Init
+    os_core.o(.text) refers to os_cfg_app.o(.text) for OSCfg_Init
+    os_core.o(.text) refers to os_cpu_a.o(CODE) for OSIntCtxSw
+    os_core.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_core.o(.text) refers to os_var.o(.data) for OSIdleTaskCtr
+    os_core.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_IdleTaskStkSize
+    os_core.o(.text) refers to os_var.o(.bss) for OSIdleTaskTCB
+    os_dbg.o(.text) refers to os_dbg.o(.constdata) for OSDbg_DbgEn
+    os_flag.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_flag.o(.text) refers to os_core.o(.text) for OS_PendListInit
+    os_flag.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_flag.o(.text) refers to os_var.o(.data) for OSFlagDbgListPtr
+    os_flag.o(.text) refers to os_tick.o(.text) for OS_TickListRemove
+    os_mem.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_mem.o(.text) refers to os_var.o(.data) for OSMemDbgListPtr
+    os_msg.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_MsgPoolBasePtr
+    os_msg.o(.text) refers to os_var.o(.bss) for OSMsgPool
+    os_mutex.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_mutex.o(.text) refers to os_core.o(.text) for OS_PendListInit
+    os_mutex.o(.text) refers to os_prio.o(.text) for OS_PrioInsert
+    os_mutex.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_mutex.o(.text) refers to os_var.o(.data) for OSMutexDbgListPtr
+    os_prio.o(.text) refers to cpu_a.o(.text) for CPU_CntLeadZeros
+    os_prio.o(.text) refers to os_prio.o(.data) for OSPrioTbl
+    os_q.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_q.o(.text) refers to os_msg.o(.text) for OS_MsgQInit
+    os_q.o(.text) refers to os_core.o(.text) for OS_PendListInit
+    os_q.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_q.o(.text) refers to os_var.o(.data) for OSQDbgListPtr
+    os_sem.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_sem.o(.text) refers to os_core.o(.text) for OS_PendListInit
+    os_sem.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_sem.o(.text) refers to os_var.o(.data) for OSSemDbgListPtr
+    os_stat.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_stat.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_stat.o(.text) refers to os_tick.o(.text) for OS_TickListResetPeak
+    os_stat.o(.text) refers to os_tmr.o(.text) for OS_TmrResetPeak
+    os_stat.o(.text) refers to os_task.o(.text) for OSTaskSuspend
+    os_stat.o(.text) refers to os_time.o(.text) for OSTimeDly
+    os_stat.o(.text) refers to os_cpu_c.o(.text) for OSStatTaskHook
+    os_stat.o(.text) refers to os_var.o(.data) for OSStatTaskCPUUsageMax
+    os_stat.o(.text) refers to os_var.o(.bss) for OSMsgPool
+    os_stat.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_TickRate_Hz
+    os_task.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_task.o(.text) refers to os_core.o(.text) for OS_RdyListRemove
+    os_task.o(.text) refers to os_prio.o(.text) for OS_PrioInsert
+    os_task.o(.text) refers to os_msg.o(.text) for OS_MsgQInit
+    os_task.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_task.o(.text) refers to os_cpu_c.o(.text) for OSTaskStkInit
+    os_task.o(.text) refers to os_var.o(.data) for OSIntNestingCtr
+    os_task.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_StkSizeMin
+    os_task.o(.text) refers to os_var.o(.bss) for OSIdleTaskTCB
+    os_task.o(.text) refers to os_tick.o(.text) for OS_TickListRemove
+    os_tick.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_tick.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_tick.o(.text) refers to os_core.o(.text) for OS_PendListRemove
+    os_tick.o(.text) refers to os_task.o(.text) for OSTaskSemPend
+    os_tick.o(.text) refers to os_var.o(.data) for OSTickListTimeout
+    os_tick.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_TickTaskStkBasePtr
+    os_tick.o(.text) refers to os_var.o(.bss) for OSTickTaskTCB
+    os_time.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_time.o(.text) refers to os_tick.o(.text) for OS_TickListInsertDly
+    os_time.o(.text) refers to os_core.o(.text) for OS_RdyListRemove
+    os_time.o(.text) refers to os_cpu_c.o(.text) for OSTimeTickHook
+    os_time.o(.text) refers to os_task.o(.text) for OSTaskSemPost
+    os_time.o(.text) refers to os_var.o(.data) for OSIntNestingCtr
+    os_time.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_TickRate_Hz
+    os_time.o(.text) refers to os_var.o(.bss) for OSTickTaskTCB
+    os_tmr.o(.text) refers to os_mutex.o(.text) for OSMutexPost
+    os_tmr.o(.text) refers to os_core.o(.text) for OSSchedLock
+    os_tmr.o(.text) refers to cpu_a.o(.text) for CPU_SR_Save
+    os_tmr.o(.text) refers to os_var.o(.bss) for OSTmrMutex
+    os_tmr.o(.text) refers to os_var.o(.data) for OSTmrDbgListPtr
+    os_tmr.o(.text) refers to os_task.o(.text) for OSTaskSemPend
+    os_tmr.o(.text) refers to bsp.o(.text) for CPU_TS_TmrRd
+    os_tmr.o(.text) refers to os_cfg_app.o(.constdata) for OSCfg_TmrTaskRate_Hz
+    use_no_semi_2.o(.text) refers (Special) to use_no_semi.o(.text) for __use_no_semihosting_swi
+    __main.o(!!!main) refers to rtentry.o(.ARM.Collect$$rtentry$$00000000) for __rt_entry
+    rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for __rt_entry_li
+    rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for __rt_entry_main
+    rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to rtentry2.o(.ARM.Collect$$rtentry$$0000000C) for __rt_entry_postli_1
+    rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to rtentry2.o(.ARM.Collect$$rtentry$$00000009) for __rt_entry_postsh_1
+    rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to rtentry2.o(.ARM.Collect$$rtentry$$00000002) for __rt_entry_presh_1
+    rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to rtentry4.o(.ARM.Collect$$rtentry$$00000004) for __rt_entry_sh
+    aeabi_ldiv0_sigfpe.o(.text) refers to rt_div0.o(.text) for __rt_div0
+    rtentry2.o(.ARM.Collect$$rtentry$$00000008) refers to boardinit2.o(.text) for _platform_post_stackheap_init
+    rtentry2.o(.ARM.Collect$$rtentry$$0000000A) refers to libinit.o(.ARM.Collect$$libinit$$00000000) for __rt_lib_init
+    rtentry2.o(.ARM.Collect$$rtentry$$0000000B) refers to boardinit3.o(.text) for _platform_post_lib_init
+    rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to main.o(.text) for main
+    rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to app.o(.text) for main
+    rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to exit.o(.text) for exit
+    rtentry2.o(.ARM.exidx) refers to rtentry2.o(.ARM.Collect$$rtentry$$00000001) for .ARM.Collect$$rtentry$$00000001
+    rtentry2.o(.ARM.exidx) refers to rtentry2.o(.ARM.Collect$$rtentry$$00000008) for .ARM.Collect$$rtentry$$00000008
+    rtentry2.o(.ARM.exidx) refers to rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for .ARM.Collect$$rtentry$$0000000A
+    rtentry2.o(.ARM.exidx) refers to rtentry2.o(.ARM.Collect$$rtentry$$0000000B) for .ARM.Collect$$rtentry$$0000000B
+    rtentry2.o(.ARM.exidx) refers to rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for .ARM.Collect$$rtentry$$0000000D
+    rtentry4.o(.ARM.Collect$$rtentry$$00000004) refers to sys_stackheap_outer.o(.text) for __user_setup_stackheap
+    rtentry4.o(.ARM.exidx) refers to rtentry4.o(.ARM.Collect$$rtentry$$00000004) for .ARM.Collect$$rtentry$$00000004
+    rt_div0.o(.text) refers to defsig_fpe_outer.o(.text) for __rt_SIGFPE
+    sys_stackheap_outer.o(.text) refers to libspace.o(.text) for __user_perproc_libspace
+    sys_stackheap_outer.o(.text) refers to startup_stm32f40_41xxx.o(.text) for __user_initial_stackheap
+    exit.o(.text) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for __rt_exit
+    defsig_fpe_outer.o(.text) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    defsig_fpe_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_fpe_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002C) for __rt_lib_init_alloca_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002A) for __rt_lib_init_argv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000019) for __rt_lib_init_atexit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001F) for __rt_lib_init_clock_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_cpp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_exceptions_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000001) for __rt_lib_init_fp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001D) for __rt_lib_init_fp_trap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000021) for __rt_lib_init_getenv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000008) for __rt_lib_init_heap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000F) for __rt_lib_init_lc_collate_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000011) for __rt_lib_init_lc_ctype_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000013) for __rt_lib_init_lc_monetary_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000015) for __rt_lib_init_lc_numeric_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000017) for __rt_lib_init_lc_time_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000C) for __rt_lib_init_rand_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000031) for __rt_lib_init_return
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001B) for __rt_lib_init_signal_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000023) for __rt_lib_init_stdio_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000A) for __rt_lib_init_user_alloc_1
+    libspace.o(.text) refers to libspace.o(.bss) for __libspace_start
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for .ARM.Collect$$rtexit$$00000000
+    rt_raise.o(.text) refers to __raise.o(.text) for __raise
+    rt_raise.o(.text) refers to usart.o(.text) for _sys_exit
+    defsig_exit.o(.text) refers to usart.o(.text) for _sys_exit
+    defsig_fpe_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    libinit2.o(.ARM.Collect$$libinit$$00000001) refers to fpinit.o(x$fpl$fpinit) for _fp_init
+    libinit2.o(.ARM.Collect$$libinit$$0000000E) refers to libinit2.o(.ARM.Collect$$libinit$$0000000D) for .ARM.Collect$$libinit$$0000000D
+    libinit2.o(.ARM.Collect$$libinit$$00000010) refers to libinit2.o(.ARM.Collect$$libinit$$0000000D) for .ARM.Collect$$libinit$$0000000D
+    libinit2.o(.ARM.Collect$$libinit$$00000012) refers to libinit2.o(.ARM.Collect$$libinit$$0000000D) for .ARM.Collect$$libinit$$0000000D
+    libinit2.o(.ARM.Collect$$libinit$$00000014) refers to libinit2.o(.ARM.Collect$$libinit$$0000000D) for .ARM.Collect$$libinit$$0000000D
+    libinit2.o(.ARM.Collect$$libinit$$00000016) refers to libinit2.o(.ARM.Collect$$libinit$$0000000D) for .ARM.Collect$$libinit$$0000000D
+    libinit2.o(.ARM.Collect$$libinit$$00000024) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    libinit2.o(.ARM.Collect$$libinit$$00000025) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    rtexit2.o(.ARM.Collect$$rtexit$$00000003) refers to libshutdown.o(.ARM.Collect$$libshutdown$$00000000) for __rt_lib_shutdown
+    rtexit2.o(.ARM.Collect$$rtexit$$00000004) refers to usart.o(.text) for _sys_exit
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000001) for .ARM.Collect$$rtexit$$00000001
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for .ARM.Collect$$rtexit$$00000003
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for .ARM.Collect$$rtexit$$00000004
+    __raise.o(.text) refers to defsig.o(CL$$defsig) for __default_signal_handler
+    defsig_general.o(.text) refers to sys_wrch.o(.text) for _ttywrch
+    argv_veneer.o(.emb_text) refers to no_argv.o(.text) for __ARM_get_argv
+    sys_wrch.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_wrch.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig.o(CL$$defsig) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    defsig.o(CL$$defsig) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    _get_argv_nomalloc.o(.text) refers (Special) to hrguard.o(.text) for __heap_region$guard
+    _get_argv_nomalloc.o(.text) refers to defsig_rtmem_outer.o(.text) for __rt_SIGRTMEM
+    _get_argv_nomalloc.o(.text) refers to sys_command.o(.text) for _sys_command_string
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000006) for __rt_lib_shutdown_fp_trap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E) for __rt_lib_shutdown_heap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F) for __rt_lib_shutdown_return
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000009) for __rt_lib_shutdown_signal_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000003) for __rt_lib_shutdown_stdio_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000B) for __rt_lib_shutdown_user_alloc_1
+    sys_command.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_command.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig_abrt_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtred_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtmem_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtmem_outer.o(.text) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    defsig_rtmem_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_rtmem_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    defsig_stak_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_pvfn_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_cppl_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_segv_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_other.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+
