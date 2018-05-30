@@ -14,6 +14,7 @@
 #include "exfuns.h"    
 #include "dev_lcd.h"
 #include "drv_lcd.h"
+#include "audio_common.h"
 
 
 
@@ -79,7 +80,9 @@ int main(void)
     BSP_Init();////时钟配置，APB配置1:42,2:84Mhz，PLL配置、切换到PLL168Mhz,/* Initialize BSP functions                             */
     CPU_Init();                /* Initialize the uC/CPU services                       */
     uart_init(115200);//初始化打印串口
-    BSP_IntDisAll();          //由汇编代码关掉中断         /* Disable all interrupts.                              */
+   // BSP_IntDisAll();          //由汇编代码关掉中断         /* Disable all interrupts.                              */
+    	
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
     LED_Init();		        //初始化LED端口
 	dev_key_init();         //xqy
 	ddi_key_open();
@@ -246,8 +249,8 @@ static  void  AppTaskStart (void *p_arg)
 static  void  SystemTaskStart (void *p_arg)
 {
     OS_ERR      err;
+
     (void)p_arg;
-    
     main_printf("进入系统键盘扫描任务\n");
     while(1)
     {
@@ -258,16 +261,45 @@ static  void  SystemTaskStart (void *p_arg)
                           &err);
     }
 }
+extern u8 FileList[128][13];
+extern AudioPlay_Info AudioPlayInfo;
 static  void  MusicTaskStart(void *p_arg)
 {
     OS_ERR      err;
+    u16 num,cnt = 0;
+    char dir_x[20];
+    u8 i;
     (void)p_arg;
-    
+    num = ReadDir("music");
     main_printf("进入音乐播放任务\n");
-    
-    mp3_play_song("music/无所谓 (Live).mp3");
-    
-    main_printf("正在删除音乐任务控制块！！\n");
+    for(i=0;i<num;i++)
+    {
+        printf("%d.%s\n",i,FileList[i]);
+    }
+    AudioPlay_Init();
+	while(1)
+	{
+		sprintf(dir_x,"%s/%s","music",FileList[cnt]);
+        printf("\r\n即将播放 --%s--\r\n",dir_x);
+		AudioPlayFile((u8 *)"music/那夜我喝了酒.wav");
+		
+		#if 0 /*xqy 2018-5-17*/
+		if(AudioPlayInfo.PlayRes == AudioPlay_Next)
+		{
+			cnt ++;
+			if(cnt >= num)
+				cnt = 0;
+		}
+		else if(AudioPlay_Prev == AudioPlayInfo.PlayRes)
+		{
+			if(cnt != 0)
+				cnt --;
+			else
+				cnt = num-1;
+		}
+		#endif
+	}
+    //mp3_play_song("music/无所谓 (Live).mp3");
     OSTaskDel(&MusicTaskStartTCB, &err);
     main_printf("删除音乐任务控制块结束err==%d\n",err);
 

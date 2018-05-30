@@ -80,6 +80,9 @@ void Dac2_Set_Vol(u16 vol)
 	u16 data;
 	temp[0] = vol;
 	temp[1] = vol>>8;
+	//data = (s16)vol;
+	//data = data>>4;
+	//data = data + 2048;
 	data = ((temp[1]-0x80)<<4)|(temp[0]>>4);//网上抄的16位PCM转换成12位的PCM值得代码，我不知道原理
 	
 	DAC_SetChannel2Data(DAC_Align_12b_R,data);//12位右对齐数据格式设置DAC值

@@ -1,15 +1,13 @@
 #include "mp3player.h" 
 
-
-
+#define DIR_MAX_ITEM 128
+#define MUSIC_DEFAULT_DIR "music"
+    
+//FATFS fatfs;
+char FileList[DIR_MAX_ITEM][13];
+const char* MUSIC_EXTNAME_FILTER[] = {"MP3","WAV",""};
+    
 extern uint8_t buf_fin;
-
-
-
-uint8_t play_state=0;
-#define play 0
-#define stop 1
-uint8_t stop_buf=0;
 u8 change_flag = 0;//每当有一个buff被推送完成时就开始读数据并转化
 
 static const  ID3V2 id3v2[] =
@@ -62,7 +60,60 @@ static const  ID3V2 id3v2[] =
     "APIC", "保存小图片的标签"
 };
 
+u8 CheckExtName(const char* path,const char** extname)
+{
+    uint8_t i = 0;
+    char* ch = strrchr(path,'.');
+    
+    if(ch == NULL)
+        return 0;
+    
+    if(*extname[0] == '\0')
+        return 1;//未指定扩展名 均返回真
+    
+    while(*extname[i] != '\0')
+    {
+        if(!strncasecmp(ch+1,extname[i],strlen(extname[i])))
+            return 1;
+        i ++;
+    }
+    
+    return 0;
+}
+
 //struct ID3V2_HEAD ID3V2_head;
+unsigned char ReadDir(char* dir_str)
+{
+	uint16_t cnt = 0;
+	DIR dir;
+	FILINFO fileinfo;
+	FRESULT res;
+	
+	f_opendir(&dir,dir_str);
+	
+	res = f_readdir(&dir,&fileinfo);
+
+	while((fileinfo.fname[0] && res == FR_OK))
+	{
+		if(fileinfo.fattrib & AM_DIR)
+			goto NEXT;
+		
+		if(!CheckExtName(fileinfo.fname,MUSIC_EXTNAME_FILTER))
+			goto NEXT;
+		
+		strcpy(FileList[cnt],fileinfo.fname);
+		
+		cnt ++;
+		if (cnt >= DIR_MAX_ITEM)
+			break;
+		NEXT:
+		res = f_readdir(&dir,&fileinfo);
+	}
+	
+	f_closedir(&dir);
+	
+	return cnt;
+}
 
 
 

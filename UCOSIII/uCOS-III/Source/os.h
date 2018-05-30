@@ -1036,7 +1036,7 @@ struct os_tcb {
     OS_TICK              TickRemain;                        /* Number of ticks remaining (updated at by OS_TickTask() */
     OS_TICK              TickCtrPrev;                       /* Used by OSTimeDly??() in PERIODIC mode                 */
 
-#if OS_CFG_SCHED_ROUND_ROBIN_EN > 0u
+#if OS_CFG_SCHED_ROUND_ROBIN_EN > 0u//相同优先级的任务时间片xqy
     OS_TICK              TimeQuanta;
     OS_TICK              TimeQuantaCtr;
 #endif
