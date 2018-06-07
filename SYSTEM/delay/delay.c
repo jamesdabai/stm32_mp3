@@ -157,6 +157,53 @@ void delay_ms(u16 nms)
 			 
 #endif
 
+void delay_os(u32 ms)
+{
+    OS_ERR err;
+    u16 min = ms/1000/60;
+    u16 sec = ms/1000%60;
+    u16 ms_xqy = ms%1000;
+    
+    OSTimeDlyHMSM(0u, min, sec, ms_xqy,
+                          OS_OPT_TIME_HMSM_STRICT,
+                          &err);
+}
+
+__asm void NOP(void)
+{
+	nop
+	BX lr
+	nop
+}
+
+void delayms(int ms)//该延时1ms相对精确
+{
+	int us;
+	
+	while(ms--)
+	{
+		us=16800;//1510;
+		while(us--)
+		{
+			NOP();
+		}
+	}
+}
+void delay_us(u32 us)//这个不确定是否是延时1US，待确认
+{
+	int ns;
+	
+	while(us--)
+	{
+		ns=17;//1510;
+		while(ns--)
+		{
+			NOP();
+		}
+	}
+}
+
+
 
 
 

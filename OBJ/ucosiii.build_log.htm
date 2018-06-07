@@ -4,9 +4,482 @@
 <h1>礦ision Build Log</h1>
 <h2>Project:</h2>
 C:\Users\xiaqiyun.NEXGO\Desktop\STM32\xiaqiyun_test\USER\LED.uvproj
-Project File Date:  03/13/2018
+Project File Date:  06/06/2018
 
 <h2>Output:</h2>
-</pre>
-</body>
-</html>
+Build target 'LED'
+compiling main.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\HARDWARE\LCD\drv_lcd.h(14): warning:  #47-D: incompatible redefinition of macro "RED" (declared at line 235 of "..\HARDWARE\LCD\dev_lcd.h")
+  #define RED    0xf800
+..\HARDWARE\LCD\drv_lcd.h(15): warning:  #47-D: incompatible redefinition of macro "GREEN" (declared at line 233 of "..\HARDWARE\LCD\dev_lcd.h")
+  #define GREEN  0x07e0
+..\HARDWARE\LCD\drv_lcd.h(16): warning:  #47-D: incompatible redefinition of macro "BLUE" (declared at line 232 of "..\HARDWARE\LCD\dev_lcd.h")
+  #define BLUE   0x001f
+..\HARDWARE\LCD\drv_lcd.h(17): warning:  #47-D: incompatible redefinition of macro "YELLOW" (declared at line 237 of "..\HARDWARE\LCD\dev_lcd.h")
+  #define YELLOW 0xffe0
+..\HARDWARE\LCD\drv_lcd.h(18): warning:  #47-D: incompatible redefinition of macro "WHITE" (declared at line 238 of "..\HARDWARE\LCD\dev_lcd.h")
+  #define WHITE  0xffff
+..\HARDWARE\LCD\drv_lcd.h(20): warning:  #47-D: incompatible redefinition of macro "PURPLE" (declared at line 243 of "..\HARDWARE\LCD\dev_lcd.h")
+  #define PURPLE 0xf81f
+main.c(86): warning:  #223-D: function "KEY_Init" declared implicitly
+      KEY_Init();//初始化开发板键盘，支持组合按键
+main.c(87): warning:  #223-D: function "LCD_Init" declared implicitly
+      LCD_Init();//初始化5.0寸大屏
+main.c(94): warning:  #223-D: function "delayms" declared implicitly
+                delayms(500);                                   
+main.c(106): warning:  #223-D: function "delayms" declared implicitly
+                delayms(500);
+main.c(78): warning:  #177-D: variable "ret" was declared but never referenced
+      s32 ret;
+main.c(195): warning:  #223-D: function "key_read" declared implicitly
+          ret = key_read(&key);
+main.c(198): warning:  #223-D: function "disp_keyvalue" declared implicitly
+              disp_keyvalue(key);
+main.c(214): warning:  #223-D: function "KEY_Scan" declared implicitly
+          KEY_Scan(0); 
+main.c(230): warning:  #223-D: function "ReadDir" declared implicitly
+      num = ReadDir("music");
+main.c(241): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *"
+                AudioPlayFile((u8 *)"music/陈信喆 - 我又想你了.mp3");
+main.c(260): warning:  #111-D: statement is unreachable
+      OSTaskDel(&MusicTaskStartTCB, &err);
+main.c(50): warning:  #177-D: function "AppTaskCreate" was declared but never referenced
+  static  void  AppTaskCreate         (void);
+main.c(51): warning:  #177-D: function "AppObjCreate" was declared but never referenced
+  static  void  AppObjCreate          (void);
+main.c: 20 warnings, 0 errors
+linking...
+Program Size: Code=106428 RO-data=198260 RW-data=432 ZI-data=157512  
+FromELF: creating hex file...
+"..\OBJ\ucosiii.axf" - 0 Error(s), 20 Warning(s).
+ lcd.o).
+Finished: 0 information, 0 warning and 3 error messages.
+"..\OBJ\ucosiii.axf" - 3 Error(s), 19 Warning(s).
+Target not created
+DWARE\dev_key.c(328): warning:  #223-D: function "uart_printf" declared implicitly
+                  key_debug("chg:%04x, sta:%04x\r\n", KeyChgBuf.chg[KeyChgBuf.head].chg, row_sta);
+..\HARDWARE\dev_key.c(400): warning:  #223-D: function "uart_printf" declared implicitly
+             uart_printf("按下:%d\n",key);
+..\HARDWARE\dev_key.c(983): warning:  #223-D: function "uart_printf" declared implicitly
+          key_debug("chg: %04x, %04x\r\n", key_chg_sta.chg, key_chg_sta.sta);
+..\HARDWARE\dev_key.c(968): warning:  #177-D: variable "i" was declared but never referenced
+      u8 i;
+..\HARDWARE\dev_key.c(969): warning:  #177-D: variable "cnt" was declared but never referenced
+      u8 cnt;
+..\HARDWARE\dev_key.c(970): warning:  #177-D: variable "lParam" was declared but never referenced
+      u32 lParam;
+..\HARDWARE\dev_key.c(973): warning:  #177-D: variable "onoff_sta" was declared but never referenced
+      static u8 onoff_sta = 0;//保证只执行一次
+..\HARDWARE\dev_key.c(974): warning:  #177-D: variable "timeid" was declared but never referenced
+      static s32 timeid = 0;
+..\HARDWARE\dev_key.c(1183): warning:  #223-D: function "uart_printf" declared implicitly
+              key_debug("key: %s ", &key_fun_tab[key&0x000000ff]);
+..\HARDWARE\dev_key.c(1447): error:  #40: expected an identifier
+        static u8 key_up=1;//按键按松开标志
+..\HARDWARE\dev_key.c(1449): error:  #137: expression must be a modifiable lvalue
+            key_up=1;  //支持连按                 
+..\HARDWARE\dev_key.c(1452): warning:  #223-D: function "delay_os" declared implicitly
+                delay_os(20);//delayms(10);//去抖动 
+..\HARDWARE\dev_key.c(1453): error:  #137: expression must be a modifiable lvalue
+                key_up=0;
+..\HARDWARE\dev_key.c(1481): error:  #137: expression must be a modifiable lvalue
+            key_up=1;   
+..\HARDWARE\dev_key.c: 12 warnings, 4 errors
+"..\OBJ\ucosiii.axf" - 4 Error(s), 32 Warning(s).
+Target not created
+WARE\dev_key.c(1453): error:  #137: expression must be a modifiable lvalue
+                key_up=0;
+..\HARDWARE\dev_key.c(1481): error:  #137: expression must be a modifiable lvalue
+            key_up=1;   
+..\HARDWARE\dev_key.c: 12 warnings, 4 errors
+"..\OBJ\ucosiii.axf" - 7 Error(s), 32 Warning(s).
+Target not created
+arning:  #223-D: function "delay_os" declared implicitly
+                delay_os(20);//delayms(10);//去抖动 
+..\HARDWARE\dev_key.c(1453): error:  #137: expression must be a modifiable lvalue
+                key_up=0;
+..\HARDWARE\dev_key.c(1481): error:  #137: expression must be a modifiable lvalue
+            key_up=1;   
+..\HARDWARE\dev_key.c: 12 warnings, 4 errors
+"..\OBJ\ucosiii.axf" - 11 Error(s), 32 Warning(s).
+Target not created
+le redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\HARDWARE\LCD\lcd.c: 1 warning, 0 errors
+"..\OBJ\ucosiii.axf" - 11 Error(s), 33 Warning(s).
+Target not created
+of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   BLUE                 0x001F                // 蓝色：    0,   0, 255 //
+..\HARDWARE\LCD\dev_lcd.h(233): warning:  #47-D: incompatible redefinition of macro "GREEN" (declared at line 15 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   GREEN                0x07E0                // 绿色：    0, 255,   0 //
+..\HARDWARE\LCD\dev_lcd.h(235): warning:  #47-D: incompatible redefinition of macro "RED" (declared at line 14 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   RED                  0xF800                // 红色：  255,   0,   0 //
+..\HARDWARE\LCD\dev_lcd.h(237): warning:  #47-D: incompatible redefinition of macro "YELLOW" (declared at line 17 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   YELLOW               0xFFE0                // 黄色：  255, 255, 0   //
+..\HARDWARE\LCD\dev_lcd.h(238): warning:  #47-D: incompatible redefinition of macro "WHITE" (declared at line 18 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   WHITE                0xFFFF                // 白色：  255, 255, 255 //
+..\HARDWARE\LCD\dev_lcd.h(243): warning:  #47-D: incompatible redefinition of macro "PURPLE" (declared at line 20 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   PURPLE               0x780F                // 紫色：  128,   0, 128 //
+..\HARDWARE\LCD\drv_lcd.c(76): warning:  #223-D: function "SPI2_Init" declared implicitly
+      SPI2_Init();//初始化spi2
+..\HARDWARE\LCD\drv_lcd.c(82): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(85): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(&data1, 1);
+..\HARDWARE\LCD\drv_lcd.c(93): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(96): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(data, len);
+..\HARDWARE\LCD\drv_lcd.c(104): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(107): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(&data, 1);
+..\HARDWARE\LCD\drv_lcd.c(116): warning:  #223-D: function "delayms" declared implicitly
+        delayms(2);
+..\HARDWARE\LCD\drv_lcd.c(155): warning:  #69-D: integer conversion resulted in truncation
+                x2 = LCD_QR_WIDTH-1 ;
+..\HARDWARE\LCD\drv_lcd.c(276): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        RST_LCD_QR_level(1);
+..\HARDWARE\LCD\drv_lcd.c(317): warning:  #223-D: function "delayms" declared implicitly
+        delayms(2);
+..\HARDWARE\LCD\drv_lcd.c(330): warning:  #69-D: integer conversion resulted in truncation
+        dev_lcd_qr_fill_rectangle(0, 0, LCD_QR_WIDTH - 1, LCD_QR_HEIGHT - 1, 0);//xqy填充黑色
+..\HARDWARE\LCD\drv_lcd.c(270): warning:  #177-D: variable "i" was declared but never referenced
+        int i, j ;
+..\HARDWARE\LCD\drv_lcd.c(270): warning:  #177-D: variable "j" was declared but never referenced
+        int i, j ;
+..\HARDWARE\LCD\drv_lcd.c(271): warning:  #177-D: variable "redh" was declared but never referenced
+        u8 redh, redl ;
+..\HARDWARE\LCD\drv_lcd.c(271): warning:  #177-D: variable "redl" was declared but never referenced
+        u8 redh, redl ;
+..\HARDWARE\LCD\drv_lcd.c(359): error:  #165: too few arguments in function call
+        LCD_WR_REG(LCD_Reg);            //写入要读的寄存器序号
+..\HARDWARE\LCD\drv_lcd.c(366): error:  #20: identifier "lcddev" is undefined
+        LCD->LCD_REG=lcddev.wramcmd;      
+..\HARDWARE\LCD\drv_lcd.c(509): warning:  #223-D: function "LCD_delay" declared implicitly
+      LCD_delay(10);                                       
+..\HARDWARE\LCD\drv_lcd.c(513): error:  #159: declaration is incompatible with previous "LCD_delay" (declared at line 509)
+  volatile void LCD_delay(char j)
+..\HARDWARE\LCD\drv_lcd.c: 24 warnings, 3 errors
+"..\OBJ\ucosiii.axf" - 14 Error(s), 56 Warning(s).
+Target not created
+er,32,&real_len);
+..\HARDWARE\LCD\dev_lcd.c(929): warning:  #223-D: function "dev_gpio_write" declared implicitly
+      BL_LCD_QR_level(OFF);
+..\HARDWARE\LCD\dev_lcd.c(934): warning:  #223-D: function "dev_gpio_write" declared implicitly
+      BL_LCD_QR_level(ON);
+..\HARDWARE\LCD\dev_lcd.c(447): warning:  #177-D: function "dev_lcd_show_bmp_ram" was declared but never referenced
+  static s32 dev_lcd_show_bmp_ram(u32 x, u32 y, u32 xlen, u32 ylen, const u8 *BmpFileName)
+..\HARDWARE\LCD\dev_lcd.c: 23 warnings, 0 errors
+compiling drv_lcd.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\HARDWARE\LCD\dev_lcd.h(232): warning:  #47-D: incompatible redefinition of macro "BLUE" (declared at line 16 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   BLUE                 0x001F                // 蓝色：    0,   0, 255 //
+..\HARDWARE\LCD\dev_lcd.h(233): warning:  #47-D: incompatible redefinition of macro "GREEN" (declared at line 15 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   GREEN                0x07E0                // 绿色：    0, 255,   0 //
+..\HARDWARE\LCD\dev_lcd.h(235): warning:  #47-D: incompatible redefinition of macro "RED" (declared at line 14 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   RED                  0xF800                // 红色：  255,   0,   0 //
+..\HARDWARE\LCD\dev_lcd.h(237): warning:  #47-D: incompatible redefinition of macro "YELLOW" (declared at line 17 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   YELLOW               0xFFE0                // 黄色：  255, 255, 0   //
+..\HARDWARE\LCD\dev_lcd.h(238): warning:  #47-D: incompatible redefinition of macro "WHITE" (declared at line 18 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   WHITE                0xFFFF                // 白色：  255, 255, 255 //
+..\HARDWARE\LCD\dev_lcd.h(243): warning:  #47-D: incompatible redefinition of macro "PURPLE" (declared at line 20 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   PURPLE               0x780F                // 紫色：  128,   0, 128 //
+..\HARDWARE\LCD\drv_lcd.c(76): warning:  #223-D: function "SPI2_Init" declared implicitly
+      SPI2_Init();//初始化spi2
+..\HARDWARE\LCD\drv_lcd.c(82): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(85): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(&data1, 1);
+..\HARDWARE\LCD\drv_lcd.c(93): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(96): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(data, len);
+..\HARDWARE\LCD\drv_lcd.c(104): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(107): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(&data, 1);
+..\HARDWARE\LCD\drv_lcd.c(116): warning:  #223-D: function "delayms" declared implicitly
+        delayms(2);
+..\HARDWARE\LCD\drv_lcd.c(155): warning:  #69-D: integer conversion resulted in truncation
+                x2 = LCD_QR_WIDTH-1 ;
+..\HARDWARE\LCD\drv_lcd.c(276): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        RST_LCD_QR_level(1);
+..\HARDWARE\LCD\drv_lcd.c(317): warning:  #223-D: function "delayms" declared implicitly
+        delayms(2);
+..\HARDWARE\LCD\drv_lcd.c(330): warning:  #69-D: integer conversion resulted in truncation
+        dev_lcd_qr_fill_rectangle(0, 0, LCD_QR_WIDTH - 1, LCD_QR_HEIGHT - 1, 0);//xqy填充黑色
+..\HARDWARE\LCD\drv_lcd.c(270): warning:  #177-D: variable "i" was declared but never referenced
+        int i, j ;
+..\HARDWARE\LCD\drv_lcd.c(270): warning:  #177-D: variable "j" was declared but never referenced
+        int i, j ;
+..\HARDWARE\LCD\drv_lcd.c(271): warning:  #177-D: variable "redh" was declared but never referenced
+        u8 redh, redl ;
+..\HARDWARE\LCD\drv_lcd.c(271): warning:  #177-D: variable "redl" was declared but never referenced
+        u8 redh, redl ;
+..\HARDWARE\LCD\drv_lcd.c(359): error:  #165: too few arguments in function call
+        LCD_WR_REG(LCD_Reg);            //写入要读的寄存器序号
+..\HARDWARE\LCD\drv_lcd.c(366): error:  #20: identifier "lcddev" is undefined
+        LCD->LCD_REG=lcddev.wramcmd;      
+..\HARDWARE\LCD\drv_lcd.c(509): warning:  #223-D: function "LCD_delay" declared implicitly
+      LCD_delay(10);                                       
+..\HARDWARE\LCD\drv_lcd.c(513): error:  #159: declaration is incompatible with previous "LCD_delay" (declared at line 509)
+  volatile void LCD_delay(char j)
+..\HARDWARE\LCD\drv_lcd.c: 24 warnings, 3 errors
+"..\OBJ\ucosiii.axf" - 14 Error(s), 84 Warning(s).
+Target not created
+tion "uart_printf" declared implicitly
+                    printf("\r\n磁盘总容量:%d KB\r\n"
+..\FATFS\exfuns\fattester.c(211): warning:  #223-D: function "uart_printf" declared implicitly
+                    printf("\r\n磁盘总容量:%d MB\r\n"
+..\FATFS\exfuns\fattester.c(279): warning:  #223-D: function "uart_printf" declared implicitly
+                printf("\r\n磁盘%s 的盘符为:%s\r\n",path,buf);
+..\FATFS\exfuns\fattester.c(281): warning:  #223-D: function "uart_printf" declared implicitly
+        }else printf("\r\n获取失败，错误码:%X\r\n",res);
+..\FATFS\exfuns\fattester.c(291): warning:  #223-D: function "uart_printf" declared implicitly
+                printf("\r\n磁盘盘符设置成功:%s\r\n",path);
+..\FATFS\exfuns\fattester.c(292): warning:  #223-D: function "uart_printf" declared implicitly
+        }else printf("\r\n磁盘盘符设置失败，错误码:%X\r\n",res);
+..\FATFS\exfuns\fattester.c(304): warning:  #223-D: function "uart_printf" declared implicitly
+                printf("\r\nThe String Readed Is:%s\r\n",rbuf);           
+..\FATFS\exfuns\fattester.c: 12 warnings, 0 errors
+compiling diskio.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\FATFS\src\diskio.c: 1 warning, 0 errors
+compiling ff.c...
+compiling cc936.c...
+compiling mp3player.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\MP3\mp3player.c(202): warning:  #513-D: a value of type "u8 *" cannot be assigned to an entity of type "char *"
+        head_size = data_read_buf;//帧头用来算长度的指针
+..\MP3\mp3player.c(208): warning:  #167-D: argument of type "unsigned char *" is incompatible with parameter of type "char *"
+        MP3_ID3V2_disp(read_ptr);//打印ID3V2标签帧的信息
+..\MP3\mp3player.c(252): warning:  #223-D: function "PA1_out_high" declared implicitly
+                    PA1_out_high();
+..\MP3\mp3player.c(254): warning:  #223-D: function "PA1_out_low" declared implicitly
+              PA1_out_low();
+..\MP3\mp3player.c(263): warning:  #223-D: function "PA1_out_high" declared implicitly
+                    PA1_out_high();
+..\MP3\mp3player.c(265): warning:  #223-D: function "PA1_out_low" declared implicitly
+                        PA1_out_low();
+..\MP3\mp3player.c(274): warning:  #223-D: function "set_buff" declared implicitly
+                    set_buff(data_pcm_buf,data_pcm_buf2);//将储存PCM数据的指针地址赋值给DAC可以操作的全局变量
+..\MP3\mp3player.c(275): warning:  #223-D: function "Dac1_Init" declared implicitly
+                    Dac1_Init();
+..\MP3\mp3player.c(276): warning:  #223-D: function "Dac2_Init" declared implicitly
+                    Dac2_Init();//初始化DAC
+..\MP3\mp3player.c(277): warning:  #223-D: function "TIM3_Int_Init" declared implicitly
+                    TIM3_Int_Init(1,7619-1);//1906/2-1);//7619-1);//初始化定时器44.1Khz//降到22.05khz
+..\MP3\mp3player.c(338): warning:  #225-D: the format string ends before this argument
+                                            printf("DMA 设置尺寸\r\n", err);
+..\MP3\mp3player.c(343): warning:  #225-D: the format string ends before this argument
+                                            printf("参数不对，跳出循环\r\n", err);
+..\MP3\mp3player.c(388): warning:  #225-D: the format string ends before this argument
+        printf("MP3播放结束\r\n", err);
+..\MP3\mp3player.c(391): warning:  #223-D: function "TIM3_Deinit" declared implicitly
+        TIM3_Deinit();
+..\MP3\mp3player.c(144): warning:  #177-D: variable "key" was declared but never referenced
+        u8 key;
+..\MP3\mp3player.c(873): warning:  #513-D: a value of type "char *" cannot be assigned to an entity of type "u8 *"
+      ptr = read_ptr+10;//偏移跳过头帧10字节
+..\MP3\mp3player.c(912): warning:  #42-D: operand types are incompatible ("u8 *" and "char *")
+          if(ptr - read_ptr>4096)
+..\MP3\mp3player.c(912): warning:  #993-D: subtraction of pointer types "u8 *" and "char *" is nonstandard
+          if(ptr - read_ptr>4096)
+..\MP3\mp3player.c(864): warning:  #177-D: variable "j" was declared but never referenced
+      u8 i,j;
+..\MP3\mp3player.c(929): warning:  #940-D: missing return statement at end of non-void function "MP3_ID3V1_disp"
+  }
+..\MP3\mp3player.c(934): warning:  #940-D: missing return statement at end of non-void function "wav_play_song"
+  }
+..\MP3\mp3player.c: 22 warnings, 0 errors
+compiling mp3dec.c...
+..\MP3\mp3dec.c(319): warning:  #223-D: function "uart_printf" declared implicitly
+            uart_printf("解析输入空指针\n");
+..\MP3\mp3dec.c(327): warning:  #223-D: function "uart_printf" declared implicitly
+            uart_printf("解包的输入数据错误或比特率错误\n");
+..\MP3\mp3dec.c(392): warning:  #223-D: function "uart_printf" declared implicitly
+                    uart_printf("数据不足\n");
+..\MP3\mp3dec.c(414): warning:  #223-D: function "uart_printf" declared implicitly
+                        uart_printf("数据不足11\n");
+..\MP3\mp3dec.c: 4 warnings, 0 errors
+compiling mp3tabs.c...
+assembling asmmisc.s...
+assembling asmpoly_thumb2.s...
+compiling bitstream.c...
+..\MP3\real\bitstream.c(248): warning:  #223-D: function "uart_printf" declared implicitly
+            uart_printf("采样率或者比特率错误\n");
+..\MP3\real\bitstream.c(282): warning:  #223-D: function "uart_printf" declared implicitly
+            uart_printf("该数据帧需要校验\n");
+..\MP3\real\bitstream.c: 2 warnings, 0 errors
+compiling buffers.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\MP3\real\buffers.c: 1 warning, 0 errors
+compiling dct32.c...
+compiling dequant.c...
+compiling dqchan.c...
+..\MP3\real\dqchan.c(248): warning:  #550-D: variable "cbStartL" was set but never used
+        int cbStartL, cbEndL, cbStartS, cbEndS;
+..\MP3\real\dqchan.c: 1 warning, 0 errors
+compiling huffman.c...
+compiling hufftabs.c...
+compiling imdct.c...
+compiling scalfact.c...
+..\MP3\real\scalfact.c(211): warning:  #550-D: variable "iipTest" was set but never used
+        int i, sfb, sfcIdx, btIdx, nrIdx, iipTest;
+..\MP3\real\scalfact.c: 1 warning, 0 errors
+compiling stproc.c...
+compiling subband.c...
+compiling trigtabs.c...
+compiling audio_common.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\MP3\audio_common.c(149): warning:  #223-D: function "uart_printf" declared implicitly
+        uart_printf("配置结束\n");
+..\MP3\audio_common.c(177): warning:  #223-D: function "uart_printf" declared implicitly
+                    uart_printf("MP3播放\n");
+..\MP3\audio_common.c(191): warning:  #177-D: variable "NVIC_InitStructure" was declared but never referenced
+        NVIC_InitTypeDef                                NVIC_InitStructure;
+..\MP3\audio_common.c(222): warning:  #223-D: function "uart_printf" declared implicitly
+        uart_printf("打开DAC使能\n");
+..\MP3\audio_common.c(258): warning:  #223-D: function "uart_printf" declared implicitly
+          uart_printf("time2==%d\n",time_xqy);
+..\MP3\audio_common.c: 6 warnings, 0 errors
+compiling audio_mp3.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\MP3\audio_mp3.c(290): warning:  #223-D: function "uart_printf" declared implicitly
+                                    uart_printf("解码错误\n");
+..\MP3\audio_mp3.c: 2 warnings, 0 errors
+compiling audio_mp3_rom.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\MP3\audio_mp3_rom.c: 1 warning, 0 errors
+compiling audio_wav.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\MP3\audio_wav.c(30): warning:  #223-D: function "uart_printf" declared implicitly
+                        uart_printf("音频格式==%04x\n",info->AudioFormat);
+..\MP3\audio_wav.c(66): warning:  #223-D: function "uart_printf" declared implicitly
+        uart_printf("数据偏移==%d\n",info->DataStartOffset);
+..\MP3\audio_wav.c(84): warning:  #223-D: function "uart_printf" declared implicitly
+                uart_printf("打开文件错误\n");
+..\MP3\audio_wav.c(113): warning:  #223-D: function "Audio_first_play" declared implicitly
+                Audio_first_play(Wav_File);
+..\MP3\audio_wav.c(121): warning:  #223-D: function "uart_printf" declared implicitly
+                        uart_printf("播放结束\n");
+..\MP3\audio_wav.c: 6 warnings, 0 errors
+compiling dev_lcd.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\HARDWARE\LCD\dev_lcd.h(232): warning:  #47-D: incompatible redefinition of macro "BLUE" (declared at line 16 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   BLUE                 0x001F                // 蓝色：    0,   0, 255 //
+..\HARDWARE\LCD\dev_lcd.h(233): warning:  #47-D: incompatible redefinition of macro "GREEN" (declared at line 15 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   GREEN                0x07E0                // 绿色：    0, 255,   0 //
+..\HARDWARE\LCD\dev_lcd.h(235): warning:  #47-D: incompatible redefinition of macro "RED" (declared at line 14 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   RED                  0xF800                // 红色：  255,   0,   0 //
+..\HARDWARE\LCD\dev_lcd.h(237): warning:  #47-D: incompatible redefinition of macro "YELLOW" (declared at line 17 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   YELLOW               0xFFE0                // 黄色：  255, 255, 0   //
+..\HARDWARE\LCD\dev_lcd.h(238): warning:  #47-D: incompatible redefinition of macro "WHITE" (declared at line 18 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   WHITE                0xFFFF                // 白色：  255, 255, 255 //
+..\HARDWARE\LCD\dev_lcd.h(243): warning:  #47-D: incompatible redefinition of macro "PURPLE" (declared at line 20 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   PURPLE               0x780F                // 紫色：  128,   0, 128 //
+..\HARDWARE\LCD\dev_lcd.c(472): warning:  #223-D: function "sprintf" declared implicitly
+      sprintf(file_name , "picture/%s",BmpFileName);//拼接成完整路径名
+..\HARDWARE\LCD\dev_lcd.c(473): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const TCHAR *"
+        ret = f_open(&BMP_FD,file_name,FA_READ);
+..\HARDWARE\LCD\dev_lcd.c(491): warning:  #167-D: argument of type "int *" is incompatible with parameter of type "UINT *"
+      f_read(&BMP_FD,bmpfileheaddata,56,&len);//读文件头数据
+..\HARDWARE\LCD\dev_lcd.c(527): warning:  #167-D: argument of type "int *" is incompatible with parameter of type "UINT *"
+                    f_read(&BMP_FD,data,LineBytes,&len);//读数据
+..\HARDWARE\LCD\dev_lcd.c(560): warning:  #167-D: argument of type "int *" is incompatible with parameter of type "UINT *"
+                    f_read(&BMP_FD,data,LineBytes,&len);//读数据
+..\HARDWARE\LCD\dev_lcd.c(450): warning:  #177-D: variable "buf" was declared but never referenced
+        unsigned short buf[40];
+..\HARDWARE\LCD\dev_lcd.c(457): warning:  #550-D: variable "ImgSize" was set but never used
+        unsigned long ImgSize;
+..\HARDWARE\LCD\dev_lcd.c(458): warning:  #550-D: variable "k" was set but never used
+        unsigned long i, j, k;
+..\HARDWARE\LCD\dev_lcd.c(459): warning:  #550-D: variable "NumColors" was set but never used
+        unsigned long NumColors;
+..\HARDWARE\LCD\dev_lcd.c(463): warning:  #177-D: variable "picdata" was declared but never referenced
+      u16 picdata ;
+..\HARDWARE\LCD\dev_lcd.c(642): warning:  #177-D: variable "p" was declared but never referenced
+                u8 * p;
+..\HARDWARE\LCD\dev_lcd.c(643): warning:  #177-D: variable "len" was declared but never referenced
+                int len;
+..\HARDWARE\LCD\dev_lcd.c(816): warning:  #167-D: argument of type "int *" is incompatible with parameter of type "UINT *"
+          f_read(&hz_fd,dot_buffer,32,&real_len);
+..\HARDWARE\LCD\dev_lcd.c(929): warning:  #223-D: function "dev_gpio_write" declared implicitly
+      BL_LCD_QR_level(OFF);
+..\HARDWARE\LCD\dev_lcd.c(934): warning:  #223-D: function "dev_gpio_write" declared implicitly
+      BL_LCD_QR_level(ON);
+..\HARDWARE\LCD\dev_lcd.c(447): warning:  #177-D: function "dev_lcd_show_bmp_ram" was declared but never referenced
+  static s32 dev_lcd_show_bmp_ram(u32 x, u32 y, u32 xlen, u32 ylen, const u8 *BmpFileName)
+..\HARDWARE\LCD\dev_lcd.c: 23 warnings, 0 errors
+compiling drv_lcd.c...
+..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
+    #define STM32F40_41xxx
+..\HARDWARE\LCD\dev_lcd.h(232): warning:  #47-D: incompatible redefinition of macro "BLUE" (declared at line 16 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   BLUE                 0x001F                // 蓝色：    0,   0, 255 //
+..\HARDWARE\LCD\dev_lcd.h(233): warning:  #47-D: incompatible redefinition of macro "GREEN" (declared at line 15 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   GREEN                0x07E0                // 绿色：    0, 255,   0 //
+..\HARDWARE\LCD\dev_lcd.h(235): warning:  #47-D: incompatible redefinition of macro "RED" (declared at line 14 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   RED                  0xF800                // 红色：  255,   0,   0 //
+..\HARDWARE\LCD\dev_lcd.h(237): warning:  #47-D: incompatible redefinition of macro "YELLOW" (declared at line 17 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   YELLOW               0xFFE0                // 黄色：  255, 255, 0   //
+..\HARDWARE\LCD\dev_lcd.h(238): warning:  #47-D: incompatible redefinition of macro "WHITE" (declared at line 18 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   WHITE                0xFFFF                // 白色：  255, 255, 255 //
+..\HARDWARE\LCD\dev_lcd.h(243): warning:  #47-D: incompatible redefinition of macro "PURPLE" (declared at line 20 of "..\HARDWARE\LCD\drv_lcd.h")
+  #define   PURPLE               0x780F                // 紫色：  128,   0, 128 //
+..\HARDWARE\LCD\drv_lcd.c(76): warning:  #223-D: function "SPI2_Init" declared implicitly
+      SPI2_Init();//初始化spi2
+..\HARDWARE\LCD\drv_lcd.c(82): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(85): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(&data1, 1);
+..\HARDWARE\LCD\drv_lcd.c(93): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(96): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(data, len);
+..\HARDWARE\LCD\drv_lcd.c(104): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        CS_LCD_QR_level(0);
+..\HARDWARE\LCD\drv_lcd.c(107): warning:  #223-D: function "dev_spi_write" declared implicitly
+        dev_spi_write(&data, 1);
+..\HARDWARE\LCD\drv_lcd.c(116): warning:  #223-D: function "delayms" declared implicitly
+        delayms(2);
+..\HARDWARE\LCD\drv_lcd.c(155): warning:  #69-D: integer conversion resulted in truncation
+                x2 = LCD_QR_WIDTH-1 ;
+..\HARDWARE\LCD\drv_lcd.c(276): warning:  #223-D: function "dev_gpio_write" declared implicitly
+        RST_LCD_QR_level(1);
+..\HARDWARE\LCD\drv_lcd.c(317): warning:  #223-D: function "delayms" declared implicitly
+        delayms(2);
+..\HARDWARE\LCD\drv_lcd.c(330): warning:  #69-D: integer conversion resulted in truncation
+        dev_lcd_qr_fill_rectangle(0, 0, LCD_QR_WIDTH - 1, LCD_QR_HEIGHT - 1, 0);//xqy填充黑色
+..\HARDWARE\LCD\drv_lcd.c(270): warning:  #177-D: variable "i" was declared but never referenced
+        int i, j ;
+..\HARDWARE\LCD\drv_lcd.c(270): warning:  #177-D: variable "j" was declared but never referenced
+        int i, j ;
+..\HARDWARE\LCD\drv_lcd.c(271): warning:  #177-D: variable "redh" was declared but never referenced
+        u8 redh, redl ;
+..\HARDWARE\LCD\drv_lcd.c(271): warning:  #177-D: variable "redl" was declared but never referenced
+        u8 redh, redl ;
+..\HARDWARE\LCD\drv_lcd.c(359): error:  #165: too few arguments in function call
+        LCD_WR_REG(LCD_Reg);            //写入要读的寄存器序号
+..\HARDWARE\LCD\drv_lcd.c(366): error:  #20: identifier "lcddev" is undefined
+        LCD->LCD_REG=lcddev.wramcmd;      
+..\HARDWARE\LCD\drv_lcd.c(509): warning:  #223-D: function "LCD_delay" declared implicitly
+      LCD_delay(10);                                       
+..\HARDWARE\LCD\drv_lcd.c(513): error:  #159: declaration is incompatible with previous "LCD_delay" (declared at line 509)
+  volatile void LCD_delay(char j)
+..\HARDWARE\LCD\drv_lcd.c(703): error:  #136: struct "<unnamed>" has no field "BSRR"
+        Lcd_Light_ON;
+..\HARDWARE\LCD\drv_lcd.c: 24 warnings, 4 errors
+"..\OBJ\ucosiii.axf" - 4 Error(s), 189 Warning(s).
+Target not created

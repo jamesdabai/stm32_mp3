@@ -1,6 +1,0 @@
--c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I..\CORE -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\HARDWARE\LED -I..\FWLIB\inc -I..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP -I..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III -I..\UCOSIII\uC-CPU -I..\UCOSIII\uC-CPU\ARM-Cortex-M4\RealView -I..\UCOSIII\uC-LIB -I..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M4\RealView -I..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView -I..\UCOSIII\uCOS-III\Source
--I "C:\software xqy\keil\ARM\RV31\INC"
--I "C:\software xqy\keil\ARM\CMSIS\Include"
--I "C:\software xqy\keil\ARM\Inc\ST\STM32F4xx"
--DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX
--o ..\obj\app.o --omf_browse ..\obj\app.crf --depend ..\obj\app.d "..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III\app.c"

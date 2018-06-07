@@ -1744,6 +1744,7 @@ void get_fileinfo (		/* No return code */
 		BYTE *dir = dp->dir;
 
 		i = 0;
+		//uart_printf("1---\n");
 		while (i < 11) {		/* Copy name body and extension */
 			c = (TCHAR)dir[i++];
 			if (c == ' ') continue;			/* Skip padding spaces */
@@ -1766,11 +1767,15 @@ void get_fileinfo (		/* No return code */
 		fno->fdate = LD_WORD(dir+DIR_WrtDate);		/* Date */
 		fno->ftime = LD_WORD(dir+DIR_WrtTime);		/* Time */
 	}
+	//uart_printf("2---\n");
 	*p = 0;		/* Terminate SFN string by a \0 */
 
 #if _USE_LFN
+   // uart_printf("3---\n");
+
 	if (fno->lfname) {
 		WCHAR w, *lfn;
+        //uart_printf("4---\n");
 
 		i = 0; p = fno->lfname;
 		if (dp->sect && fno->lfsize && dp->lfn_idx != 0xFFFF) {	/* Get LFN if available */
@@ -3247,24 +3252,32 @@ FRESULT f_readdir (
 
 
 	res = validate(dp);						/* Check validity of the object */
-	if (res == FR_OK) {
-		if (!fno) {
+	if (res == FR_OK) 
+	{
+		if (!fno) 
+		{
 			res = dir_sdi(dp, 0);			/* Rewind the directory object */
-		} else {
+		} 
+		else 
+		{
 			INIT_BUF(*dp);
 			res = dir_read(dp, 0);			/* Read an item */
-			if (res == FR_NO_FILE) {		/* Reached end of directory */
+			if (res == FR_NO_FILE) 
+			{		/* Reached end of directory */
 				dp->sect = 0;
 				res = FR_OK;
 			}
-			if (res == FR_OK) {				/* A valid entry is found */
+			if (res == FR_OK) 
+			{				/* A valid entry is found */
 				get_fileinfo(dp, fno);		/* Get the object information */
 				res = dir_next(dp, 0);		/* Increment index for next */
-				if (res == FR_NO_FILE) {
+				if (res == FR_NO_FILE) 
+				{
 					dp->sect = 0;
 					res = FR_OK;
 				}
 			}
+			//uart_printf("%s,len=%d\n",fno->lfname,fno->lfsize);
 			FREE_BUF();
 		}
 	}

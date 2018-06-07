@@ -1606,7 +1606,7 @@ void SD_DMA_Config(u32*mbuf,u32 bufsize,u32 dir)
 
   DMA_InitTypeDef  DMA_InitStructure;
 	
-	while (DMA_GetCmdStatus(DMA2_Stream3) != DISABLE){}//等待DMA可配置 
+ while (DMA_GetCmdStatus(DMA2_Stream3) != DISABLE){}//等待DMA可配置 
 		
   DMA_DeInit(DMA2_Stream3);//清空之前该stream3上的所有中断标志
 	

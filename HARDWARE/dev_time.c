@@ -72,25 +72,6 @@ void delay_ms(int ms)//ÑÓÊ±º¯Êý
 		}
 	}
 }
-__asm void NOP(void)
-{
-	nop
-	BX lr
-	nop
-}
 
-void delayms(int ms)
-{
-	int us;
-	
-	while(ms--)
-	{
-		us=16800;//1510;
-		while(us--)
-		{
-			NOP();
-		}
-	}
-}
 
 

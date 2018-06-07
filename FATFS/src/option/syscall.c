@@ -135,7 +135,7 @@ void* ff_memalloc (	/* Returns pointer to the allocated memory block */
 	UINT msize		/* Number of bytes to allocate */
 )
 {
-	return malloc(msize);
+	return (void*)mymalloc(msize);//return malloc(msize);
 }
 
 
@@ -147,7 +147,7 @@ void ff_memfree (
 	void* mblock	/* Pointer to the memory block to free */
 )
 {
-	free(mblock);
+	myfree(mblock);//free(mblock);
 }
 
 #endif

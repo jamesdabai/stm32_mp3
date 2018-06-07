@@ -41,3 +41,4 @@
 ..\obj\drv_lcd.o: ..\HARDWARE\LCD\drv_lcd.h
 ..\obj\drv_lcd.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\math.h
 ..\obj\drv_lcd.o: ..\HARDWARE\LCD\dev_lcd.h
+..\obj\drv_lcd.o: ..\HARDWARE\LCD\font.h

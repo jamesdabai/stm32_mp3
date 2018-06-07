@@ -49,8 +49,8 @@
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <DebugInformation>0</DebugInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>..\OBJ\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -141,7 +141,7 @@
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
             <RestoreSysVw>1</RestoreSysVw>
-            <UsePdscDebugDescription>1</UsePdscDebugDescription>
+            <UsePdscDebugDescription>0</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>1</TargetSelection>
@@ -172,7 +172,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>Segger\JL2CM3.dll</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -1164,6 +1164,26 @@
               <FileName>mp3common.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\MP3\pub\mp3common.h</FilePath>
+            </File>
+            <File>
+              <FileName>audio_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio_mp3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_mp3.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio_mp3_rom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_mp3_rom.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio_wav.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_wav.c</FilePath>
             </File>
           </Files>
         </Group>

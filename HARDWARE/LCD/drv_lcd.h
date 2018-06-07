@@ -63,5 +63,28 @@ extern void lcd_qr_send_data(u8 *data, u16 len);
 extern void lcd_qr_ascii_setPos(u8 x1, u8 y1, u8 x2, u8 y2);
 extern void lcd_qr_string_display(u8* pdata,u16 inlen);
 
+
+/////////////////////////TFT液晶屏加电容触摸屏模块//////////////////////
+
+#include "sys.h"
+
+//LCD地址结构体
+typedef struct
+{
+	u16 LCD_REG;
+	u16 LCD_RAM;
+} LCD_TypeDef;
+
+//使用NOR/SRAM的 Bank1.sector1,地址位HADDR[27,26]=00   A18作为数据命令区分线 
+//注意设置时STM32内部会右移一位对其! 			    
+#define LCD_BASE        ((u32)(0x60000000 | 0x00007FFFE))
+#define LCD             ((LCD_TypeDef *) LCD_BASE)
+
+#define	LCD_LED PBout(1)  		//LCD背光    		 PB1 
+#define Lcd_Light_ON   {LCD_LED=1;}
+#define Lcd_Light_OFF  {LCD_LED=0;}
+
+
+
 #endif
 

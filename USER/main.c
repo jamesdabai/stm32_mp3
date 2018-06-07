@@ -14,6 +14,7 @@
 #include "exfuns.h"    
 #include "dev_lcd.h"
 #include "drv_lcd.h"
+#include "audio_common.h"
 
 
 
@@ -78,11 +79,14 @@ int main(void)
 
     BSP_Init();////时钟配置，APB配置1:42,2:84Mhz，PLL配置、切换到PLL168Mhz,/* Initialize BSP functions                             */
     CPU_Init();                /* Initialize the uC/CPU services                       */
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
     uart_init(115200);//初始化打印串口
-    BSP_IntDisAll();          //由汇编代码关掉中断         /* Disable all interrupts.                              */
+	delay_init(168);		  //初始化延时函数//系统systick都在这里初始化
     LED_Init();		        //初始化LED端口
-	dev_key_init();         //xqy
-	ddi_key_open();
+    KEY_Init();//初始化开发板键盘，支持组合按键
+    LCD_Init();//初始化5.0寸大屏
+	//dev_key_init();         //xqy
+	//ddi_key_open();
 	my_mem_init(SRAMIN);		//初始化内部内存池  
     while(SD_Init())//检测不到SD卡
 	{
@@ -104,35 +108,7 @@ int main(void)
 	}	
     main_printf("SD Total Size:%d MB\n",(total>>10));
     main_printf("SD  Free Size: %d    MB\n",(free>>10));
-    
-    #if 0 /*xqy 2018-1-29*/
-    ret = f_open(&file, "121/hello.txt", FA_READ | FA_WRITE );
-    if(ret==0)
-    {
-        main_printf("打开成功！");
-        printf("该文件长度为%d:\r\n",f_size(&file));
-       // ret = f_read(&file, buf, 512, &ret);
-        if(ret == 0)
-        {
-            //printf("SECTOR 0 DATA:\r\n");
-			for(sd_size=0;sd_size<512;sd_size++)
-			{
-			    //printf("%02x ",buf[sd_size]);//打印0扇区数据    	
-			    //delay_ms(4);
-			    OSTimeDlyHMSM(0u, 0u, 0u, 4u,
-                          OS_OPT_TIME_HMSM_STRICT,
-                          &err);
-			}
-			//printf("\r\nDATA ENDED\r\n");
-			//delay_ms(4);
-        }
-    }
-    f_close(&file);
-    #endif
-	dev_QR_lcd_open();//打开lcd屏
-	main_printf("打开lcd屏\n");
-	ddi_qr_lcd_show_text_ext(1,1,"已经打开lcd屏",CDISP);
-	
+
     OSInit(&err);    /* Init uC/OS-III.xqy会将hook函数指针清零                                      */
     main_printf("初始化hook函数\n");
     //App_OS_SetAllHooks();
@@ -160,28 +136,11 @@ int main(void)
 
 static  void  AppTaskStart (void *p_arg)
 {
-    CPU_INT32U  cpu_clk_freq;
-    CPU_INT32U  cnts;
+    
     OS_ERR      err;
-    u8 sz,i;
     u32 key;
     u32 ret;
-    
-    FIL file;          //文件1
-    u8  buf[512];
-    u32 sd_size;
-
-    (void)p_arg;
-    delay_init(168);		  //初始化延时函数
-    main_printf("LEDapp任务\n");
-    //cpu_clk_freq = BSP_CPU_ClkFreq();                           /* Determine SysTick reference freq.                    */
-    //cnts         = cpu_clk_freq                                 /* Determine nbr SysTick increments                     */
-   //              / (CPU_INT32U)OSCfg_TickRate_Hz;               //1ms
-   // OS_CPU_SysTickInit(cnts);                                   /* Init uC/OS periodic time src (SysTick).              */
-
-    //Mem_Init();                                                 /* Initialize memory managment module                   */
-    //Math_Init();                                                /* Initialize mathematical module*/
-
+		(void)p_arg;//除编译警告
 #if OS_CFG_STAT_TASK_EN > 0u
     OSStatTaskCPUUsageInit(&err);                               /* Compute CPU capacity with no task running            */
 #endif
@@ -233,8 +192,7 @@ static  void  AppTaskStart (void *p_arg)
     	OSTimeDlyHMSM(0u, 0u, 0u, 1000u,
                           OS_OPT_TIME_HMSM_STRICT,
                           &err);
-        ret = ddi_key_read(&key);
-        //main_printf("ret=%d\n",ret);
+        ret = key_read(&key);
         if(ret>0)
         {   
             disp_keyvalue(key);
@@ -246,28 +204,59 @@ static  void  AppTaskStart (void *p_arg)
 static  void  SystemTaskStart (void *p_arg)
 {
     OS_ERR      err;
+
     (void)p_arg;
-    
     main_printf("进入系统键盘扫描任务\n");
     while(1)
     {
-        drv_key_scan();
-        dev_key_task();
-        OSTimeDlyHMSM(0u, 0u, 0u, 10u,
+        //drv_key_scan();//按键的IO口和屏的PE有冲突了，所以暂时不用按键
+       // dev_key_task();
+        KEY_Scan(0); 
+        OSTimeDlyHMSM(0u, 0u, 0u, 40u,
                           OS_OPT_TIME_HMSM_STRICT,
                           &err);
     }
 }
+extern u8 FileList[128][13];
+extern AudioPlay_Info AudioPlayInfo;
 static  void  MusicTaskStart(void *p_arg)
 {
+    
     OS_ERR      err;
+    u16 num,cnt = 0;
+    char dir_x[20];
+    u8 i;
     (void)p_arg;
-    
+    num = ReadDir("music");
     main_printf("进入音乐播放任务\n");
-    
-    mp3_play_song("music/无所谓 (Live).mp3");
-    
-    main_printf("正在删除音乐任务控制块！！\n");
+    for(i=0;i<num;i++)
+    {
+        main_printf("%d.%s\n",i,FileList[i]);
+    }
+    AudioPlay_Init();
+	while(1)
+	{
+		sprintf(dir_x,"%s/%s","music",FileList[cnt]);
+        main_printf("\r\n即将播放 --%s--\r\n",dir_x);
+		AudioPlayFile((u8 *)"music/陈信喆 - 我又想你了.mp3");
+		
+		#if 0 /*xqy 2018-5-17*/
+		if(AudioPlayInfo.PlayRes == AudioPlay_Next)
+		{
+			cnt ++;
+			if(cnt >= num)
+				cnt = 0;
+		}
+		else if(AudioPlay_Prev == AudioPlayInfo.PlayRes)
+		{
+			if(cnt != 0)
+				cnt --;
+			else
+				cnt = num-1;
+		}
+		#endif
+	}
+    //mp3_play_song("music/无所谓 (Live).mp3");
     OSTaskDel(&MusicTaskStartTCB, &err);
     main_printf("删除音乐任务控制块结束err==%d\n",err);
 

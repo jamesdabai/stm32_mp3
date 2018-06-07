@@ -392,7 +392,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>..\OBJ\ucosiii.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -1164,6 +1164,26 @@
               <FileName>mp3common.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\MP3\pub\mp3common.h</FilePath>
+            </File>
+            <File>
+              <FileName>audio_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio_mp3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_mp3.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio_mp3_rom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_mp3_rom.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio_wav.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MP3\audio_wav.c</FilePath>
             </File>
           </Files>
         </Group>

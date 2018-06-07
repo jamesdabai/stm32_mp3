@@ -73,3 +73,4 @@
 ..\obj\main.o: ..\FATFS\src\ffconf.h
 ..\obj\main.o: ..\HARDWARE\LCD\dev_lcd.h
 ..\obj\main.o: ..\HARDWARE\LCD\drv_lcd.h
+..\obj\main.o: ..\MP3\audio_common.h

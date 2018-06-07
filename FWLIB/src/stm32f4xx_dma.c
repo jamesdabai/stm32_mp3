@@ -1209,16 +1209,17 @@ ITStatus DMA_GetITStatus(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT)
   {
     /* Get DMAy HISR register value */
     tmpreg = DMAy->HISR ;
+    //uart_printf("high ==%08x\n",tmpreg);
   }
   else
   {
     /* Get DMAy LISR register value */
     tmpreg = DMAy->LISR ;
+    //uart_printf("low ==%08x\n",tmpreg);
   } 
 
   /* mask all reserved bits */
   tmpreg &= (uint32_t)RESERVED_MASK;
-
   /* Check the status of the specified DMA interrupt */
   if (((tmpreg & DMA_IT) != (uint32_t)RESET) && (enablestatus != (uint32_t)RESET))
   {

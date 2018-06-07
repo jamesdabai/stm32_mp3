@@ -330,3 +330,493 @@ void st7735s_initial(void)
 	dev_lcd_qr_fill_rectangle(0, 0, LCD_QR_WIDTH - 1, LCD_QR_HEIGHT - 1, 0);//xqy填充黑色
 
 }
+
+
+/////////////////////////TFT液晶屏加电容触摸屏模块//////////////////////
+#include "font.h" 
+
+//读LCD数据
+//返回值:读到的值
+u16 LCD_RD_DATA(void)
+{		
+	vu16 ram;			//防止被优化
+	ram=LCD->LCD_RAM;
+	return ram;		 
+}					   
+//写寄存器
+//LCD_Reg:寄存器地址
+//LCD_RegValue:要写入的数据
+void LCD_WriteReg(vu16 LCD_Reg, vu16 LCD_RegValue)
+{	
+	LCD->LCD_REG = LCD_Reg;		//写入要写的寄存器序号	 
+	LCD->LCD_RAM = LCD_RegValue;//写入数据	    		 
+}	   
+//读寄存器
+//LCD_Reg:寄存器地址
+//返回值:读到的数据
+u16 LCD_ReadReg(vu16 LCD_Reg)
+{										   
+	LCD_WR_REG(LCD_Reg);		//写入要读的寄存器序号
+	delay_us(5);		  
+	return LCD_RD_DATA();		//返回读到的值
+}   
+//开始写GRAM
+void LCD_WriteRAM_Prepare(void)
+{
+ 	LCD->LCD_REG=lcddev.wramcmd;	  
+}	 
+//LCD写GRAM
+//RGB_Code:颜色值
+void LCD_WriteRAM(u16 RGB_Code)
+{							    
+	LCD->LCD_RAM = RGB_Code;//写十六位GRAM
+}
+
+/*
+ * 函数名：LCD_FSMC_Config
+ * 描述  ：LCD  FSMC 模式配置
+ * 输入  ：无
+ * 输出  ：无
+ * 调用  ：内部调用        
+ */
+static void LCD_FSMC_Config(void)
+{
+    GPIO_InitTypeDef  GPIO_InitStructure;
+	FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
+    FSMC_NORSRAMTimingInitTypeDef  readWriteTiming; 
+	FSMC_NORSRAMTimingInitTypeDef  writeTiming;
+	
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOD|RCC_AHB1Periph_GPIOE, ENABLE);//使能IO时钟  
+    RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC,ENABLE);//使能FSMC时钟  
+	
+ 
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;//PB1 推挽输出,控制背光
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;//普通输出模式
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//推挽输出
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//100MHz
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//上拉
+    GPIO_Init(GPIOB, &GPIO_InitStructure);//初始化 //PB15 推挽输出,控制背光
+	
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_8
+																|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;//PD0,1,4,5,8,9,10,14,15 AF OUT
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用输出
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//推挽输出
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//上拉
+    GPIO_Init(GPIOD, &GPIO_InitStructure);//初始化  
+	
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12
+																|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;//PE7~15,AF OUT
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用输出
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//推挽输出
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//上拉
+    GPIO_Init(GPIOE, &GPIO_InitStructure);//初始化  
+
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;//PF12,FSMC_A18
+//  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用输出
+//  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//推挽输出
+//  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
+//  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//上拉
+//  GPIO_Init(GPIOD, &GPIO_InitStructure);//初始化  
+
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;//PF12,FSMC_A6
+//  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;//复用输出
+//  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//推挽输出
+//  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
+//  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//上拉
+//  GPIO_Init(GPIOG, &GPIO_InitStructure);//初始化 
+
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource0,GPIO_AF_FSMC);// 
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource1,GPIO_AF_FSMC);// 
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource4,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource5,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource7,GPIO_AF_FSMC); //和ZET6芯片差异	
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource8,GPIO_AF_FSMC); 
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource9,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource10,GPIO_AF_FSMC);
+	GPIO_PinAFConfig(GPIOD,GPIO_PinSource13,GPIO_AF_FSMC);//和ZET6芯片差异	
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource14,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOD,GPIO_PinSource15,GPIO_AF_FSMC);// 
+ 
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource7,GPIO_AF_FSMC);//PE7,AF12
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource8,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource9,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource10,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource11,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource12,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource13,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource14,GPIO_AF_FSMC);
+    GPIO_PinAFConfig(GPIOE,GPIO_PinSource15,GPIO_AF_FSMC);//PE15,AF12
+ 
+//  GPIO_PinAFConfig(GPIOF,GPIO_PinSource12,GPIO_AF_FSMC);//PF12,AF12
+//  GPIO_PinAFConfig(GPIOG,GPIO_PinSource12,GPIO_AF_FSMC);
+
+
+    readWriteTiming.FSMC_AddressSetupTime = 0XF;	 //地址建立时间（ADDSET）为16个HCLK 1/168M=6ns*16=96ns	
+    readWriteTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（ADDHLD）模式A未用到	
+    readWriteTiming.FSMC_DataSetupTime = 60;			//数据保存时间为60个HCLK	=6*60=360ns
+    readWriteTiming.FSMC_BusTurnAroundDuration = 0x00;
+    readWriteTiming.FSMC_CLKDivision = 0x00;
+    readWriteTiming.FSMC_DataLatency = 0x00;
+    readWriteTiming.FSMC_AccessMode = FSMC_AccessMode_A;	 //模式A 
+    
+
+	writeTiming.FSMC_AddressSetupTime =9;	      //地址建立时间（ADDSET）为9个HCLK =54ns 
+    writeTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（A		
+    writeTiming.FSMC_DataSetupTime = 8;		 //数据保存时间为6ns*9个HCLK=54ns
+    writeTiming.FSMC_BusTurnAroundDuration = 0x00;
+    writeTiming.FSMC_CLKDivision = 0x00;
+    writeTiming.FSMC_DataLatency = 0x00;
+    writeTiming.FSMC_AccessMode = FSMC_AccessMode_A;	 //模式A 
+
+ 
+    FSMC_NORSRAMInitStructure.FSMC_Bank = FSMC_Bank1_NORSRAM1;//  这里我们使用NE1 
+    FSMC_NORSRAMInitStructure.FSMC_DataAddressMux = FSMC_DataAddressMux_Disable; // 不复用数据地址
+    FSMC_NORSRAMInitStructure.FSMC_MemoryType =FSMC_MemoryType_SRAM;// FSMC_MemoryType_SRAM;  //SRAM   
+    FSMC_NORSRAMInitStructure.FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_16b;//存储器数据宽度为16bit   
+    FSMC_NORSRAMInitStructure.FSMC_BurstAccessMode =FSMC_BurstAccessMode_Disable;// FSMC_BurstAccessMode_Disable; 
+    FSMC_NORSRAMInitStructure.FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
+	FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait=FSMC_AsynchronousWait_Disable; 
+    FSMC_NORSRAMInitStructure.FSMC_WrapMode = FSMC_WrapMode_Disable;   
+    FSMC_NORSRAMInitStructure.FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;  
+    FSMC_NORSRAMInitStructure.FSMC_WriteOperation = FSMC_WriteOperation_Enable;	//  存储器写使能
+    FSMC_NORSRAMInitStructure.FSMC_WaitSignal = FSMC_WaitSignal_Disable;   
+    FSMC_NORSRAMInitStructure.FSMC_ExtendedMode = FSMC_ExtendedMode_Enable; // 读写使用不同的时序
+    FSMC_NORSRAMInitStructure.FSMC_WriteBurst = FSMC_WriteBurst_Disable; 
+    FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &readWriteTiming; //读写时序
+    FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &writeTiming;  //写时序
+
+    FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);  //初始化FSMC配置
+
+    FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM1, ENABLE);  // 使能BANK1 
+}
+/*
+ * 函数名：LCD_GPIO_Config
+ * 描述  ：根据FSMC配置LCD的I/O
+ * 输入  ：无
+ * 输出  ：无
+ * 调用  ：内部调用        
+ */
+static void LCD_GPIO_Config(void)
+{
+    
+}
+
+static void LCD_Rst(void)
+{			
+    GPIO_ResetBits(GPIOD, GPIO_Pin_13);
+    LCD_delay(10);					   
+    GPIO_SetBits(GPIOD, GPIO_Pin_13 );		 	 
+    LCD_delay(10);	
+}
+volatile void LCD_delay(char j)
+{
+    volatile u16 i;	
+    	while(j--)
+    for(i=16800;i>0;i--);
+}
+
+
+
+void WriteComm(vu16 regval)
+{   
+     regval=regval;      //使用-O2优化的时候,必须插入的延时
+     LCD->LCD_REG=regval;//写入要写的寄存器序号     
+}
+//写LCD数据
+//data:要写入的值
+void WriteData(vu16 data)
+{    
+    data=data;          //使用-O2优化的时候,必须插入的延时
+    LCD->LCD_RAM=data;       
+}
+
+/**********************************************
+Lcd初始化函数
+***********************************************/
+void Lcd_Initialize(void)
+{	
+LCD_GPIO_Config();
+LCD_FSMC_Config();
+LCD_Rst();
+	
+//************* Start Initial Sequence **********//
+WriteComm(0xFF); // EXTC Command Set enable register 
+WriteData(0xFF); 
+WriteData(0x98); 
+WriteData(0x06); 
+
+WriteComm(0xBA); // SPI Interface Setting 
+WriteData(0xE0); 
+
+WriteComm(0xBC); // GIP 1 
+WriteData(0x03); 
+WriteData(0x0F); 
+WriteData(0x63); 
+WriteData(0x69); 
+WriteData(0x01); 
+WriteData(0x01); 
+WriteData(0x1B); 
+WriteData(0x11); 
+WriteData(0x70); 
+WriteData(0x73); 
+WriteData(0xFF); 
+WriteData(0xFF); 
+WriteData(0x08); 
+WriteData(0x09); 
+WriteData(0x05); 
+WriteData(0x00);
+WriteData(0xEE); 
+WriteData(0xE2); 
+WriteData(0x01); 
+WriteData(0x00);
+WriteData(0xC1); 
+
+WriteComm(0xBD); // GIP 2 
+WriteData(0x01); 
+WriteData(0x23); 
+WriteData(0x45); 
+WriteData(0x67); 
+WriteData(0x01); 
+WriteData(0x23); 
+WriteData(0x45); 
+WriteData(0x67); 
+
+WriteComm(0xBE); // GIP 3 
+WriteData(0x00); 
+WriteData(0x22); 
+WriteData(0x27); 
+WriteData(0x6A); 
+WriteData(0xBC); 
+WriteData(0xD8); 
+WriteData(0x92); 
+WriteData(0x22); 
+WriteData(0x22); 
+
+WriteComm(0xC7); // Vcom 
+WriteData(0x1E);
+ 
+WriteComm(0xED); // EN_volt_reg 
+WriteData(0x7F); 
+WriteData(0x0F); 
+WriteData(0x00); 
+
+WriteComm(0xC0); // Power Control 1
+WriteData(0xE3); 
+WriteData(0x0B); 
+WriteData(0x00);
+ 
+WriteComm(0xFC);
+WriteData(0x08); 
+
+WriteComm(0xDF); // Engineering Setting 
+WriteData(0x00); 
+WriteData(0x00); 
+WriteData(0x00); 
+WriteData(0x00); 
+WriteData(0x00); 
+WriteData(0x02); 
+
+WriteComm(0xF3); // DVDD Voltage Setting 
+WriteData(0x74); 
+
+WriteComm(0xB4); // Display Inversion Control 
+WriteData(0x00); 
+WriteData(0x00); 
+WriteData(0x00); 
+
+WriteComm(0xF7); // 480x854
+WriteData(0x81); 
+
+WriteComm(0xB1); // Frame Rate 
+WriteData(0x00); 
+WriteData(0x10); 
+WriteData(0x14); 
+
+WriteComm(0xF1); // Panel Timing Control 
+WriteData(0x29); 
+WriteData(0x8A); 
+WriteData(0x07); 
+
+WriteComm(0xF2); //Panel Timing Control 
+WriteData(0x40); 
+WriteData(0xD2); 
+WriteData(0x50); 
+WriteData(0x28); 
+
+WriteComm(0xC1); // Power Control 2 
+WriteData(0x17);
+WriteData(0X85); 
+WriteData(0x85); 
+WriteData(0x20); 
+
+WriteComm(0xE0); 
+WriteData(0x00); //P1 
+WriteData(0x0C); //P2 
+WriteData(0x15); //P3 
+WriteData(0x0D); //P4 
+WriteData(0x0F); //P5 
+WriteData(0x0C); //P6 
+WriteData(0x07); //P7 
+WriteData(0x05); //P8 
+WriteData(0x07); //P9 
+WriteData(0x0B); //P10 
+WriteData(0x10); //P11 
+WriteData(0x10); //P12 
+WriteData(0x0D); //P13 
+WriteData(0x17); //P14 
+WriteData(0x0F); //P15 
+WriteData(0x00); //P16 
+
+WriteComm(0xE1); 
+WriteData(0x00); //P1 
+WriteData(0x0D); //P2 
+WriteData(0x15); //P3 
+WriteData(0x0E); //P4 
+WriteData(0x10); //P5 
+WriteData(0x0D); //P6 
+WriteData(0x08); //P7 
+WriteData(0x06); //P8 
+WriteData(0x07); //P9 
+WriteData(0x0C); //P10 
+WriteData(0x11); //P11 
+WriteData(0x11); //P12 
+WriteData(0x0E); //P13 
+WriteData(0x17); //P14 
+WriteData(0x0F); //P15 
+WriteData(0x00); //P16
+
+WriteComm(0x35); //Tearing Effect ON 
+WriteData(0x00); 
+
+WriteComm(0x36); 
+WriteData(0x60); 
+
+WriteComm(0x3A); 
+WriteData(0x55); 
+
+WriteComm(0x11); //Exit Sleep 
+LCD_delay(120); 
+WriteComm(0x29); // Display On 
+LCD_delay(10);
+Lcd_Light_ON;
+
+WriteComm(0x3A); 
+WriteData(0x55);
+WriteComm(0x36); 
+WriteData(0xA8);
+Lcd_ColorBox(0,0,800,480,YELLOW);
+	
+// 	LCD_Fill_Pic(80,160,320,480, gImage_MM_T035);
+// 	BlockWrite(0,0,799,479);
+}
+
+
+/******************************************
+函数名：Lcd写命令函数
+功能：向Lcd指定位置写入应有命令或数据
+入口参数：Index 要寻址的寄存器地址
+          ConfigTemp 写入的数据或命令值
+******************************************/
+void LCD_WR_REG(u16 Index,u16 CongfigTemp)//直接操作寄存器，前提是要知道Index命令
+{
+	*(__IO u16 *) (Bank1_LCD_C) = Index;	
+	*(__IO u16 *) (Bank1_LCD_D) = CongfigTemp;
+}
+
+void BlockWrite(unsigned int Xstart,unsigned int Xend,unsigned int Ystart,unsigned int Yend)//待刷屏的区域 
+{
+	WriteComm(0x2a);   
+	WriteData(Xstart>>8);
+	WriteData(Xstart&0xff);
+	WriteData(Xend>>8);
+	WriteData(Xend&0xff);
+
+	WriteComm(0x2b);   
+	WriteData(Ystart>>8);
+	WriteData(Ystart&0xff);
+	WriteData(Yend>>8);
+	WriteData(Yend&0xff);
+	
+	WriteComm(0x2c);
+}
+ u16 GetPoint( u16 x, u16 y)//应该是获取该点的颜色星期一
+{
+	WriteComm(0x2a);   
+	WriteData(x>>8);
+	WriteData(x);
+	WriteData(x>>8);
+	WriteData(x);
+
+	WriteComm(0x2b);   
+	WriteData(y>>8);
+	WriteData(y);
+	WriteData(y>>8);
+	WriteData(y);
+
+	WriteComm(0x2e);
+	
+	x = *(__IO u16 *) (Bank1_LCD_D);x=1;while(--x);
+	x = *(__IO u16 *) (Bank1_LCD_D);
+	y = *(__IO u16 *) (Bank1_LCD_D);
+// 	printf("RIN=%04x\r\n",b);
+
+	return (x&0xf800)|((x&0x00fc)<<3)|(y>>11);
+}
+/**********************************************
+函数名：Lcd块选函数
+功能：选定Lcd上指定的矩形区域
+
+注意：xStart和 yStart随着屏幕的旋转而改变，位置是矩形框的四个角
+
+入口参数：xStart x方向的起始点
+          ySrart y方向的终止点
+          xLong 要选定矩形的x方向长度
+          yLong  要选定矩形的y方向长度
+返回值：无
+***********************************************/
+void Lcd_ColorBox(u16 xStart,u16 yStart,u16 xLong,u16 yLong,u16 Color)//画矩形
+{
+	u32 temp;
+
+	BlockWrite(xStart,xStart+xLong-1,yStart,yStart+yLong-1);
+	for (temp=0; temp<xLong*yLong; temp++)
+	{
+		*(__IO u16 *) (Bank1_LCD_D) = Color;
+	}
+}
+
+/******************************************
+函数名：Lcd图像填充100*100
+功能：向Lcd指定位置填充图像
+入口参数：Index 要寻址的寄存器地址
+          ConfigTemp 写入的数据或命令值
+******************************************/
+void LCD_Fill_Pic(u16 x, u16 y,u16 pic_H, u16 pic_V, const unsigned char* pic)
+{
+  unsigned long i;
+	unsigned int j;
+
+// 	WriteComm(0x3600); //Set_address_mode
+// 	WriteData(0x00); //横屏，从左下角开始，从左到右，从下到上
+	BlockWrite(x,x+pic_H-1,y,y+pic_V-1);
+	for (i = 0; i < pic_H*pic_V*2; i+=2)
+	{
+		j=pic[i];
+		j=j<<8;
+		j=j+pic[i+1];
+		*(__IO u16 *) (Bank1_LCD_D) = j;
+	}
+// 	WriteComm(0x3600); //Set_address_mode
+// 	WriteData(0xA0);
+}
+
+//在指定座标上打一个点
+void DrawPixel(u16 x, u16 y, int Color)//描点
+{
+	BlockWrite(x,x,y,y);
+
+	*(__IO u16 *) (Bank1_LCD_D) = Color;
+}
+
