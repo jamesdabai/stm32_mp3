@@ -47,7 +47,7 @@
 //使用DMA模式的时候,传输速率可以到48Mhz(bypass on时),不过如果你的卡不是高速
 //卡,可能也会出错,出错就请降低时钟
 #define SDIO_INIT_CLK_DIV        0x76 		//SDIO初始化频率，最大400Kh  
-#define SDIO_TRANSFER_CLK_DIV    0x0F		//SDIO传输频率,该值太小可能会导致读写文件出错 
+#define SDIO_TRANSFER_CLK_DIV    0x00		//SDIO传输频率,该值太小可能会导致读写文件出错 
 /*--PCLK2 和 SDIO_CK 时钟频率必须满足以下条件:Frequenc(PCLK2)>=3/8 *Frequency(SDIO_CK)?xqy--*/
 										 
 

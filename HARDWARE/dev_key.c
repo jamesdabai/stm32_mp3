@@ -19,6 +19,8 @@
 #include "stm32f4xx_gpio.h"
 #include "dev_time.h"
 #include "ddi.h"
+#include "core_cm4.h"
+
 #define Test_DRV_KEY
 #ifdef Test_DRV_KEY
 #define key_debug uart_printf
@@ -397,7 +399,7 @@ void disp_keyvalue(u32 key)
        case 7:
        case 8:
        case 9:
-           uart_printf("按下:%d\n",key);
+           //uart_printf("按下:%d\n",key);
            break;
        case cancel:
        case clr   :
@@ -1392,24 +1394,25 @@ static struct _key_buf KEY_BUFF;
 void KEY_Init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA|RCC_AHB1Periph_GPIOE, ENABLE);//使能GPIOA,GPIOE时钟
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);//使能GPIOA,GPIOE时钟
  
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3|GPIO_Pin_4; //KEY2 KEY3对应引脚
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5; //KEY2 KEY3对应引脚
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;//普通输入模式
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;//100M
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//上拉
     GPIO_Init(GPIOE, &GPIO_InitStructure);//初始化GPIOE2,3,4
-	
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;//WK_UP对应引脚PA0
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN ;//下拉
-    GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIOA0
-
     KEY_BUFF.end = 0;
     KEY_BUFF.head = 0;
  
 } 
+
 static s32 key_write(u32 key)
 {
+    uart_printf("写入一个键值=%d\n",key);
+    if(key==key_exit*key_ok)//如果同时按下
+    {
+        NVIC_SystemReset();
+    }
     KEY_BUFF.value[KEY_BUFF.head++] = key;//最大储存8个按键值
     if(KEY_BUFF.head >= key_buf_max)
         KEY_BUFF.head = 0;
@@ -1444,40 +1447,39 @@ s32 key_clear(void)
 //注意此函数有响应优先级,KEY0>KEY1>KEY2>WK_UP!!
 u8 KEY_Scan(u8 mode)
 {	 
+    u16 key_PE;
+    static u16 key_PE_bak=0;
+    u32 key_value_x = 1;
+    u8 i;
 	static u8 key_up_flag=1;//按键按松开标志
+	
 	if(mode)
-	    key_up_flag=1;  //支持连按		  
-	if(key_up_flag&&(KEY0==0||KEY1==0||WK_UP==1))
+	    key_up_flag=1;  //支持连按		
+	key_PE = GPIO_ReadInputData(GPIOE);
+	key_PE = ~(key_PE);//取反
+	key_PE &= 0x3f;//只取低6位数据
+	if(key_up_flag && key_PE)//
 	{
-		delay_os(20);//delayms(10);//去抖动 
+	    key_PE_bak = key_PE;
+		delay_os(50);//delayms(10);//去抖动 
 		key_up_flag=0;
-		if(KEY0==0)
-		{
-		    key_write(key0);
-		}
-		else if(KEY1==0)
-		{
-		    key_write(key1);
-		}
-		else if(WK_UP==1)
-		{
-		    key_write(key_up_flag);
-		}
-		else if(KEY0==0 && KEY1==0)
-		{
-		    key_write(key0_1);
-		}
-		else if(KEY0==0 && WK_UP==1)
-		{
-		    key_write(key0_up);
-		}
-		else if(KEY1==0 && WK_UP==1)
-		{
-		    key_write(key1_up);
-		}
+        for(i=0;i<6;i++)
+        {
+            if(key_PE&0x01)
+            {
+                key_value_x *= (i+1);//组合按键就是按键相乘的值，很好操作，取值时相乘比较是否是该组合键按下
+            }
+			key_PE>>=1;
+        }
+        key_write(key_value_x);
 	}
-	else if(KEY0==1&&KEY1==1&&WK_UP==0)
+	else if(key_PE==0)//无按键按下
 	{
+	    key_up_flag=1; 	
+	}
+	else if(key_PE!=key_PE_bak)//无按键按下
+	{
+	    key_PE_bak = key_PE;
 	    key_up_flag=1; 	
 	}
  	return 0;// 无按键按下

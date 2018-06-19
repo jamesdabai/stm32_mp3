@@ -863,11 +863,11 @@ ARM Macro Assembler    Page 14
   434 0000001C                 END
               00000000 
               00000000 
-Command Line: --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\obj\startu
-p_stm32f40_41xxx.d -o..\obj\startup_stm32f40_41xxx.o -I"C:\software xqy\keil\AR
-M\RV31\INC" -I"C:\software xqy\keil\ARM\CMSIS\Include" -I"C:\software xqy\keil\
-ARM\Inc\ST\STM32F4xx" --predefine="__MICROLIB SETA 1" --list=..\obj\startup_stm
-32f40_41xxx.lst ..\CORE\startup_stm32f40_41xxx.s
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\ob
+j\startup_stm32f40_41xxx.d -o..\obj\startup_stm32f40_41xxx.o -ID:\software_work
+\keil4\ARM\RV31\INC -ID:\software_work\keil4\ARM\CMSIS\Include -ID:\software_wo
+rk\keil4\ARM\Inc\ST\STM32F4xx --predefine="__MICROLIB SETA 1" --list=..\obj\sta
+rtup_stm32f40_41xxx.lst ..\CORE\startup_stm32f40_41xxx.s
 
 
 

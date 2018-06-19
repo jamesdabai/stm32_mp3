@@ -2,9 +2,9 @@
 ..\obj\fattester.o: ..\FATFS\exfuns\fattester.h
 ..\obj\fattester.o: ..\USER\stm32f4xx.h
 ..\obj\fattester.o: ..\CORE\core_cm4.h
-..\obj\fattester.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\fattester.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\fattester.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\fattester.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\fattester.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\fattester.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\fattester.o: ..\CORE\core_cm4_simd.h
 ..\obj\fattester.o: ..\USER\system_stm32f4xx.h
 ..\obj\fattester.o: ..\USER\stm32f4xx_conf.h
@@ -40,8 +40,8 @@
 ..\obj\fattester.o: ..\FATFS\src\ffconf.h
 ..\obj\fattester.o: ..\HARDWARE\SDIO\sdio_sdcard.h
 ..\obj\fattester.o: ..\SYSTEM\usart\usart.h
-..\obj\fattester.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdio.h
+..\obj\fattester.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
 ..\obj\fattester.o: ..\SYSTEM\sys\sys.h
 ..\obj\fattester.o: ..\FATFS\exfuns\exfuns.h
 ..\obj\fattester.o: ..\MALLOC\malloc.h
-..\obj\fattester.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\string.h
+..\obj\fattester.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\string.h

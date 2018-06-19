@@ -117,12 +117,13 @@ AudioPlayRes MP3_GetInfo(FIL* fmp3,MP3_Info* pMP3info)
 	}
 	
 	pMP3info->DataSize = filesize;
-	
+	memset(MP3_INPUT_BUFFER,0,MP3_INPUT_BUFFER_SIZE);
 	f_lseek(fmp3,pMP3info->DataStartOffset);//偏移到数据开始的地方
 	f_read(fmp3,MP3_INPUT_BUFFER,MP3_INPUT_BUFFER_SIZE,&br);//读满缓冲区
 	
 	decoder = MP3InitDecoder();//MP3解码申请内存
 	offset = MP3FindSyncWord(MP3_INPUT_BUFFER,br);//查找帧同步信息
+	//uart_printf("offset==%d\n",offset);
 	if(offset >= 0 && MP3GetNextFrameInfo(decoder,&frame_info,&MP3_INPUT_BUFFER[offset])==0)//找到帧同步信息且下一帧信息获取正常	
 	{
 		p = offset+4+32;//跳过帧头(4bytes)和通道信息(32bytes) 偏移到数据区
@@ -210,6 +211,7 @@ AudioPlayRes MP3_Play(char* path)
 	UINT br;
 	FIL* MP3_File;
 	MP3_Info* MP3Info;
+	u8 exit_falg = 0;
 	
 	MP3Info = &__MP3Info;
 	MP3_File = &AudioFile;
@@ -219,9 +221,11 @@ AudioPlayRes MP3_Play(char* path)
 	if(f_open(MP3_File,path,FA_READ))//打开文件
 	{
 		res =  AudioPlay_OpenFileError;//打开文件错误
+		uart_printf("打开失败\n");
 	}
 	else//打开成功
 	{
+	    uart_printf("打开成功\n");
 		res = MP3_GetInfo(MP3_File,MP3Info);//获取文件信息
 		
 		if(!res)
@@ -238,6 +242,7 @@ AudioPlayRes MP3_Play(char* path)
 			//AudioPlay_Init();//xqy添加，ADC选择定时器为ADC转换触发源
 			if(AudioPlay_Config(16,MP3Info->Samplerate,MP3Info->SampleSize))//设置I2S
 			{
+			    uart_printf("AudioPlay_UnsupportedParameter\n");
 				res = AudioPlay_UnsupportedParameter;
 			}
 		}
@@ -250,6 +255,7 @@ AudioPlayRes MP3_Play(char* path)
 		f_lseek(MP3_File,MP3Info->DataStartOffset);//跳过文件头中tag信息
 		if(f_read(MP3_File,MP3_INPUT_BUFFER,MP3_INPUT_BUFFER_SIZE,&br))//填充满缓冲区
 		{
+		    uart_printf("read error\n");
 			res = AudioPlay_ReadFileError;
 		}
 		
@@ -263,7 +269,8 @@ AudioPlayRes MP3_Play(char* path)
 			
 			if(offset < 0)//没有找到同步字符 播放结束也依赖此处跳出循环
 			{
-				res = AudioPlay_PlayEnd;
+				
+				uart_printf("没有找到同步帧\n");
 				break;//跳出帧解码循环
 			}
 			
@@ -279,7 +286,12 @@ AudioPlayRes MP3_Play(char* path)
 				/*用户代码区*/
 				res = MusicPlayingProcess();
 				if(res)
-					break;//提高反应速度
+				{
+				    uart_printf("跳出循环\n");
+				    exit_falg=1;
+				    break;//提高反应速度
+				}
+					
 				/*用户代码区*/
 				
 				AudioPlay_PendSem();//等待信号
@@ -324,7 +336,12 @@ AudioPlayRes MP3_Play(char* path)
 			}
 		}
 	}
-	
+	if(!exit_falg)
+	{
+	    res = music_end_process();//一首歌曲播放完成了;
+	}
+	uart_printf("内存 used= %d\n",my_mem_perused(0));
+	MP3FreeDecoder(mp3decoder);	//之前没加，导致内存泄漏了，无法切换歌曲xqy
 	Play_Stop();
 	f_close(MP3_File);
 	

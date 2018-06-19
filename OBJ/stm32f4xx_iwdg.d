@@ -2,9 +2,9 @@
 ..\obj\stm32f4xx_iwdg.o: ..\FWLIB\inc\stm32f4xx_iwdg.h
 ..\obj\stm32f4xx_iwdg.o: ..\USER\stm32f4xx.h
 ..\obj\stm32f4xx_iwdg.o: ..\CORE\core_cm4.h
-..\obj\stm32f4xx_iwdg.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\stm32f4xx_iwdg.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\stm32f4xx_iwdg.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\stm32f4xx_iwdg.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\stm32f4xx_iwdg.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\stm32f4xx_iwdg.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\stm32f4xx_iwdg.o: ..\CORE\core_cm4_simd.h
 ..\obj\stm32f4xx_iwdg.o: ..\USER\system_stm32f4xx.h
 ..\obj\stm32f4xx_iwdg.o: ..\USER\stm32f4xx_conf.h

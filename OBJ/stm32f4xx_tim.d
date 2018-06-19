@@ -2,9 +2,9 @@
 ..\obj\stm32f4xx_tim.o: ..\FWLIB\inc\stm32f4xx_tim.h
 ..\obj\stm32f4xx_tim.o: ..\USER\stm32f4xx.h
 ..\obj\stm32f4xx_tim.o: ..\CORE\core_cm4.h
-..\obj\stm32f4xx_tim.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\stm32f4xx_tim.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\stm32f4xx_tim.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\stm32f4xx_tim.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\stm32f4xx_tim.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\stm32f4xx_tim.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\stm32f4xx_tim.o: ..\CORE\core_cm4_simd.h
 ..\obj\stm32f4xx_tim.o: ..\USER\system_stm32f4xx.h
 ..\obj\stm32f4xx_tim.o: ..\USER\stm32f4xx_conf.h

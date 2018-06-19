@@ -4,9 +4,9 @@
 ..\obj\diskio.o: ..\HARDWARE\SDIO\sdio_sdcard.h
 ..\obj\diskio.o: ..\USER\stm32f4xx.h
 ..\obj\diskio.o: ..\CORE\core_cm4.h
-..\obj\diskio.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\diskio.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\diskio.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\diskio.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\diskio.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\diskio.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\diskio.o: ..\CORE\core_cm4_simd.h
 ..\obj\diskio.o: ..\USER\system_stm32f4xx.h
 ..\obj\diskio.o: ..\USER\stm32f4xx_conf.h

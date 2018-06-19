@@ -141,7 +141,7 @@
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
             <RestoreSysVw>1</RestoreSysVw>
-            <UsePdscDebugDescription>1</UsePdscDebugDescription>
+            <UsePdscDebugDescription>0</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>1</TargetSelection>
@@ -172,7 +172,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>Segger\JL2CM3.dll</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -685,6 +685,11 @@
               <FileType>5</FileType>
               <FilePath>..\FWLIB\inc\stm32f4xx_tim.h</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FWLIB\src\stm32f4xx_fsmc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1191,24 +1196,9 @@
           <GroupName>LCD</GroupName>
           <Files>
             <File>
-              <FileName>dev_lcd.c</FileName>
+              <FileName>lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\LCD\dev_lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>dev_lcd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\HARDWARE\LCD\dev_lcd.h</FilePath>
-            </File>
-            <File>
-              <FileName>drv_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\LCD\drv_lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>drv_lcd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\HARDWARE\LCD\drv_lcd.h</FilePath>
+              <FilePath>..\HARDWARE\LCD\lcd.c</FilePath>
             </File>
           </Files>
         </Group>

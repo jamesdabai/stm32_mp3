@@ -90,7 +90,9 @@
 "..\obj\audio_mp3_rom.o"
 "..\obj\audio_wav.o"
 "..\obj\lcd.o"
---library_type=microlib --nodebug --strict --scatter "..\OBJ\ucosiii.sct"
+"..\obj\fontupd.o"
+"..\obj\text.o"
+--library_type=microlib --strict --scatter "..\OBJ\ucosiii.sct"
 --summary_stderr --info summarysizes --map
 --info sizes --info unused --info veneers
 --list "..\OBJ\ucosiii.map" -o ..\OBJ\ucosiii.axf

@@ -6,9 +6,9 @@
 ..\obj\buffers.o: ..\MALLOC\malloc.h
 ..\obj\buffers.o: ..\USER\stm32f4xx.h
 ..\obj\buffers.o: ..\CORE\core_cm4.h
-..\obj\buffers.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\buffers.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\buffers.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\buffers.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\buffers.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\buffers.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\buffers.o: ..\CORE\core_cm4_simd.h
 ..\obj\buffers.o: ..\USER\system_stm32f4xx.h
 ..\obj\buffers.o: ..\USER\stm32f4xx_conf.h

@@ -74,6 +74,7 @@ AudioPlayRes WAV_Play(char* path)
 	Wav_Info* WavInfo = NULL;
 	FIL* Wav_File = NULL;
 	UINT br = 0xFFFF;
+	u8 exit_flag=0;
 	
 	Wav_File = &AudioFile;
 	WavInfo = &__info;
@@ -117,7 +118,7 @@ AudioPlayRes WAV_Play(char* path)
 	{
 		if(br < DAC_Buffer_Size * 2)//读完文件了
 		{
-			res = AudioPlay_PlayEnd;
+			//res = music_end_process();//一首歌曲播放完成了
 			uart_printf("播放结束\n");
 			break;
 		}
@@ -125,9 +126,13 @@ AudioPlayRes WAV_Play(char* path)
 		AudioPlayInfo.CurrentSec = (Wav_File->fptr - WavInfo->DataStartOffset) / (WavInfo->Bitrate / WavInfo->Bps * WavInfo->nChannels);//计算播放时间
 		
 		/*用户代码区 开始*/
-		//res = MusicPlayingProcess();
-		//if(res)
-			//break;
+		res = MusicPlayingProcess();
+		if(res)
+		{
+		    exit_flag = 1;
+		    break;
+		}
+			
 		/*用户代码区 结束*/
 		
 		//uart_printf("time = %d\n",AudioPlayInfo.CurrentSec);
@@ -135,8 +140,13 @@ AudioPlayRes WAV_Play(char* path)
 		//uart_printf("read file\n");
 		f_read(Wav_File,(unsigned char*)AudioPlay_GetCurrentBuff(),DAC_Buffer_Size*4/2,&br);//填充缓冲区
 		AudioPlay_DataProc(AudioPlay_GetCurrentBuff(),DAC_Buffer_Size);
+
 	}
-	
+	if(!exit_flag)
+	{
+	    res = music_end_process();//一首歌曲播放完成了;
+	}
+	uart_printf("内存 used= %d\n",my_mem_perused(0));
 	Play_Stop();
 	f_close(Wav_File);//关闭文件
 	return res;

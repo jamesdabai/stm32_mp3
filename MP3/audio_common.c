@@ -4,9 +4,12 @@
 #include "audio_wav.h"
 #include "ff.h"
 #include <string.h>
+#include "dev_key.h"
 
 FIL AudioFile;
 AudioPlay_Info AudioPlayInfo;
+MUSIC_TRL music_ctl;
+
 uint32_t DualSine12bit[DAC_Buffer_Size];//相当于两个BUFF，前面一个，后面一个，一个buff2304*2个字节
 __IO uint8_t DataRequestFlag = 0;
 
@@ -67,25 +70,122 @@ void AudioPlay_ClearSem(void)
 {
 	DataRequestFlag = 0;
 }
+
+void curse_disp(u16 row,u16 line,u8 size,u16 color)
+{
+    u16 x,y,r;
+    u8 i;
+    x = size*music_ctl.curse_line_bak;
+    y = size*music_ctl.curse_row_bak;
+    Lcd_ColorBox(x,y,size+2,size+2,0X07FF);
+    x = size*(line)+size/2;
+    y = size*(row)+size/2;
+    r = size/2;
+    for(i=0;i<4;i++)
+    {
+        LCD_Draw_Circle(x,y,r);
+        r-=2;
+    }
+}
+void music_play_init(u16 music_totle)
+{
+     //初始化
+    music_ctl.music_totle = music_totle;//初始化文件夹下多少歌曲文件
+    music_ctl.music_num   = 0;
+    music_ctl.curse_line_bak   = 2;
+    music_ctl.curse_row_bak   = 0;
+    music_ctl.music_play_sta = AudioPlay_Sequential_loop;//循环播放
+    curse_disp(0,2,24,0x0);
+}
+s32 music_end_process(void)
+{
+    s32 ret = AudioPlay_OK;
+    switch (music_ctl.music_play_sta)
+    {
+        case AudioPlay_Sigle_loop:
+            ret = AudioPlay_OK;
+            break;
+            
+        case AudioPlay_Sequential_loop:
+            if(music_ctl.music_num>=(music_ctl.music_totle-1))
+            {
+                music_ctl.music_num = 0;
+            }
+            else
+            {
+                music_ctl.music_num++;
+            }
+            curse_disp(music_ctl.music_num,2,24,0x0);
+            music_ctl.curse_row_bak =  music_ctl.music_num;
+            uart_printf("下一曲\n");
+            break;
+            
+        case AudioPlay_Sigle:
+            ret = AudioPlay_Exit;
+            break;
+            
+        case AudioPlay_Sequential:
+            if(music_ctl.music_num>=(music_ctl.music_totle-1))
+            {
+                ret = AudioPlay_Exit;
+            }
+            else
+            {
+                music_ctl.music_num++;
+            }
+            curse_disp(music_ctl.music_num,2,24,0x0);
+            music_ctl.curse_row_bak =  music_ctl.music_num;
+            uart_printf("下一曲\n");
+            break;
+            
+        default :
+            ret = AudioPlay_Exit;
+            break;
+    }
+    
+}
 AudioPlayRes MusicPlayingProcess(void)
 {
-	#if 0 /*xqy 2018-5-17*/
-	if(!KEY2)
-	{
-		Play_Stop();
-		delay_ms(20);
-		while(!KEY2);
-		return AudioPlay_Prev;
-	}
-	else if(!KEY1)
-	{
-		Play_Stop();
-		delay_ms(20);
-		while(!KEY1);
-		return AudioPlay_Next;
-	}
-	#endif
-	
+    u32 key;
+    key_read(&key);
+    if(key!=0)
+    {
+        if(key==key_down)
+        {
+            if(music_ctl.music_num>=(music_ctl.music_totle-1))
+            {
+                music_ctl.music_num = 0;
+            }
+            else
+            {
+                music_ctl.music_num++;
+            }
+            curse_disp(music_ctl.music_num,2,24,0x0);
+            music_ctl.curse_row_bak =  music_ctl.music_num;
+            uart_printf("下一曲\n");
+        }
+        else if(key==key_up)
+        {
+            if(music_ctl.music_num<=0)
+            {
+                music_ctl.music_num = music_ctl.music_totle-1;
+            }
+            else
+            {
+                music_ctl.music_num--;
+            }
+            curse_disp(music_ctl.music_num,2,24,0x0);
+            music_ctl.curse_row_bak =  music_ctl.music_num;
+            uart_printf("上一曲\n");
+        }
+
+        if(key==key_ok)//确认键
+        {
+            uart_printf("确认\n");
+            return AudioPlay_Next;
+        }
+        return AudioPlay_OK;
+    }
 	return AudioPlay_OK;
 }
 
@@ -166,8 +266,9 @@ AudioFileType Audio_CheckFileExtname(char* path)
 	return AudioFileType_ERROR;
 }
 
-void AudioPlayFile(char* path)
+s32 AudioPlayFile(char* path)
 {
+    s32 ret;
 	memset(&AudioPlayInfo,0,sizeof(AudioPlay_Info));
 	AudioPlay_ClearSem();
 	
@@ -176,6 +277,7 @@ void AudioPlayFile(char* path)
 		case AudioFileType_MP3:
 		    uart_printf("MP3播放\n");
 			AudioPlayInfo.PlayRes = MP3_Play(path);
+			uart_printf("MP3播放==%d\n",AudioPlayInfo.PlayRes);
 			break;
 		case AudioFileType_WAV:
 		    uart_printf("WAV播放\n");
@@ -247,6 +349,7 @@ void DMA1_Stream5_IRQHandler(void)
 	//DMA_ClearITPendingBit(DMA1_Stream5,DMA_IT_TCIF7);
 	DMA_ClearITPendingBit(DMA1_Stream5,DMA_IT_TCIF5 | DMA_IT_HTIF5);
 }
+#if 0 /*xqy 2018-6-18*/
 u32 time_xqy = 0;
 void TIM2_IRQHandler(void)
 {
@@ -259,4 +362,5 @@ void TIM2_IRQHandler(void)
 	}
 	TIM_ClearITPendingBit(TIM2,TIM_IT_Update);  //清除中断标志位
 }
+#endif
 

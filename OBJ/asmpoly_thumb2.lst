@@ -1266,11 +1266,11 @@ ARM Macro Assembler    Page 20
   382 0000080E                 ENDP
   383 0000080E         
   384 0000080E                 END
-Command Line: --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\obj\asmpol
-y_thumb2.d -o..\obj\asmpoly_thumb2.o -I"C:\software xqy\keil\ARM\RV31\INC" -I"C
-:\software xqy\keil\ARM\CMSIS\Include" -I"C:\software xqy\keil\ARM\Inc\ST\STM32
-F4xx" --predefine="__MICROLIB SETA 1" --list=..\obj\asmpoly_thumb2.lst ..\MP3\r
-eal\arm\asmpoly_thumb2.s
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\ob
+j\asmpoly_thumb2.d -o..\obj\asmpoly_thumb2.o -ID:\software_work\keil4\ARM\RV31\
+INC -ID:\software_work\keil4\ARM\CMSIS\Include -ID:\software_work\keil4\ARM\Inc
+\ST\STM32F4xx --predefine="__MICROLIB SETA 1" --list=..\obj\asmpoly_thumb2.lst 
+..\MP3\real\arm\asmpoly_thumb2.s
 
 
 

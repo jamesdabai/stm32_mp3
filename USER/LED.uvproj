@@ -49,8 +49,8 @@
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>0</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
+          <DebugInformation>1</DebugInformation>
+          <BrowseInformation>1</BrowseInformation>
           <ListingPath>..\OBJ\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -362,7 +362,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\HARDWARE\LED;..\FWLIB\inc;..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP;..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III;..\UCOSIII\uC-CPU;..\UCOSIII\uC-CPU\ARM-Cortex-M4\RealView;..\UCOSIII\uC-LIB;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M4\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;..\UCOSIII\uCOS-III\Source;..\HARDWARE;..\HARDWARE\SDIO;..\HARDWARE\DMA;..\MALLOC;..\FATFS\exfuns;..\FATFS\src;..\MP3;..\MP3\pub;..\MP3\real;..\MP3\real\arm;..\HARDWARE\LCD;..\HARDWARE\SPI;..\FWLIB\src;..\HARDWARE\DAC;..\HARDWARE\TIMER</IncludePath>
+              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\HARDWARE\LED;..\FWLIB\inc;..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP;..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III;..\UCOSIII\uC-CPU;..\UCOSIII\uC-CPU\ARM-Cortex-M4\RealView;..\UCOSIII\uC-LIB;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M4\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M4\Generic\RealView;..\UCOSIII\uCOS-III\Source;..\HARDWARE;..\HARDWARE\SDIO;..\HARDWARE\DMA;..\MALLOC;..\FATFS\exfuns;..\FATFS\src;..\MP3;..\MP3\pub;..\MP3\real;..\MP3\real\arm;..\HARDWARE\LCD;..\HARDWARE\SPI;..\FWLIB\src;..\HARDWARE\DAC;..\HARDWARE\TIMER;..\HARDWARE\TEXT;..\HARDWARE\PICTURE</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -684,6 +684,11 @@
               <FileName>stm32f4xx_tim.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\FWLIB\inc\stm32f4xx_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FWLIB\src\stm32f4xx_fsmc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1191,26 +1196,24 @@
           <GroupName>LCD</GroupName>
           <Files>
             <File>
-              <FileName>dev_lcd.c</FileName>
+              <FileName>lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\LCD\dev_lcd.c</FilePath>
+              <FilePath>..\HARDWARE\LCD\lcd.c</FilePath>
             </File>
             <File>
-              <FileName>dev_lcd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\HARDWARE\LCD\dev_lcd.h</FilePath>
-            </File>
-            <File>
-              <FileName>drv_lcd.c</FileName>
+              <FileName>fontupd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\LCD\drv_lcd.c</FilePath>
+              <FilePath>..\HARDWARE\TEXT\fontupd.c</FilePath>
             </File>
             <File>
-              <FileName>drv_lcd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\HARDWARE\LCD\drv_lcd.h</FilePath>
+              <FileName>text.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\TEXT\text.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>PICTURE</GroupName>
         </Group>
       </Groups>
     </Target>

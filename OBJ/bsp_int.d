@@ -1,11 +1,11 @@
 ..\obj\bsp_int.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\bsp_int.c
 ..\obj\bsp_int.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III\includes.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdio.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\string.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\ctype.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdlib.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdarg.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\math.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\string.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\ctype.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdlib.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdarg.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\math.h
 ..\obj\bsp_int.o: ..\UCOSIII\uCOS-III\Source\os.h
 ..\obj\bsp_int.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III\os_cfg.h
 ..\obj\bsp_int.o: ..\UCOSIII\uC-CPU\cpu_core.h
@@ -27,9 +27,9 @@
 ..\obj\bsp_int.o: ..\FWLIB\inc\stm32f4xx_adc.h
 ..\obj\bsp_int.o: ..\USER\stm32f4xx.h
 ..\obj\bsp_int.o: ..\CORE\core_cm4.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\bsp_int.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\bsp_int.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\bsp_int.o: ..\CORE\core_cm4_simd.h
 ..\obj\bsp_int.o: ..\USER\system_stm32f4xx.h
 ..\obj\bsp_int.o: ..\USER\stm32f4xx_conf.h

@@ -4,7 +4,7 @@
 #define MUSIC_DEFAULT_DIR "music"
     
 //FATFS fatfs;
-char FileList[DIR_MAX_ITEM][40];
+char FileList[DIR_MAX_ITEM][50];
 const char* MUSIC_EXTNAME_FILTER[] = {"MP3","WAV",""};
     
 extern uint8_t buf_fin;
@@ -89,6 +89,11 @@ unsigned char ReadDir(char* dir_str)
 	FILINFO fileinfo;
 	FRESULT res;
 	
+	#if _USE_LFN
+    fileinfo.lfsize = _MAX_LFN * 2 + 1;
+    fileinfo.lfname = (u8 *)mymalloc(fileinfo.lfsize);
+    #endif 
+	
 	f_opendir(&dir,dir_str);
 	
 	res = f_readdir(&dir,&fileinfo);
@@ -101,7 +106,7 @@ unsigned char ReadDir(char* dir_str)
 		if(!CheckExtName(fileinfo.fname,MUSIC_EXTNAME_FILTER))
 			goto NEXT;
 		//uart_printf("%s,len=%d\n",fileinfo.lfname,fileinfo.lfsize);
-		strcpy(FileList[cnt],fileinfo.fname);
+		Str_Copy(&FileList[cnt][0],fileinfo.lfname);
 		
 		cnt ++;
 		if (cnt >= DIR_MAX_ITEM)
@@ -109,7 +114,7 @@ unsigned char ReadDir(char* dir_str)
 		NEXT:
 		res = f_readdir(&dir,&fileinfo);
 	}
-	
+	myfree(fileinfo.lfname);
 	f_closedir(&dir);
 	
 	return cnt;

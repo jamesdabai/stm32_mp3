@@ -12,8 +12,6 @@
 #include "dma.h"
 #include "malloc.h" 
 #include "exfuns.h"    
-#include "dev_lcd.h"
-#include "drv_lcd.h"
 #include "audio_common.h"
 
 
@@ -43,10 +41,6 @@ static  OS_TCB   MusicTaskStartTCB;
 static  CPU_STK  MusicTaskStartStk[APP_CFG_TASK_START_STK_SIZE];
 static  void  MusicTaskStart          (void     *p_arg);
 
-
-
-
-
 static  void  AppTaskCreate         (void);
 static  void  AppObjCreate          (void);
 
@@ -69,6 +63,36 @@ void show_sdcard_info(void)
 	printf("Card Capacity:%d MB\r\n",(u32)(SDCardInfo.CardCapacity>>20));	//显示容量
  	printf("Card BlockSize:%d\r\n\r\n",SDCardInfo.CardBlockSize);			//显示块大小
 }
+//图片显示 实验-库函数版本 
+//得到path路径下,目标文件的总个数
+//path:路径		    
+//返回值:总有效文件数
+u16 pic_get_tnum(u8 *path)
+{	  
+	u8 res;
+	u16 rval=0;
+ 	DIR tdir;	 		//临时目录
+	FILINFO tfileinfo;	//临时文件信息	
+	u8 *fn;	 			 			   			     
+    res=f_opendir(&tdir,(const TCHAR*)path); 	//打开目录
+  	tfileinfo.lfsize=_MAX_LFN*2+1;				//长文件名最大长度
+	//tfileinfo.lfname=mymalloc(SRAMIN,tfileinfo.lfsize);//为长文件缓存区分配内存
+	if(res==FR_OK&&tfileinfo.lfname!=NULL)
+	{
+		while(1)//查询总的有效文件数
+		{
+	        res=f_readdir(&tdir,&tfileinfo);       		//读取目录下的一个文件
+	        if(res!=FR_OK||tfileinfo.fname[0]==0)break;	//错误了/到末尾了,退出		  
+     		fn=(u8*)(*tfileinfo.lfname?tfileinfo.lfname:tfileinfo.fname);			 
+			res=f_typetell(fn);	
+			if((res&0XF0)==0X50)//取高四位,看看是不是图片文件	
+			{
+				rval++;//有效文件数增加1
+			}	    
+		}  
+	} 
+	return rval;
+}
 
 
 int main(void)
@@ -81,10 +105,10 @@ int main(void)
     CPU_Init();                /* Initialize the uC/CPU services                       */
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
     uart_init(115200);//初始化打印串口
-	delay_init(168);		  //初始化延时函数//系统systick都在这里初始化
+	
+	uart_printf("enter core\n");
     LED_Init();		        //初始化LED端口
     KEY_Init();//初始化开发板键盘，支持组合按键
-    LCD_Init();//初始化5.0寸大屏
 	//dev_key_init();         //xqy
 	//ddi_key_open();
 	my_mem_init(SRAMIN);		//初始化内部内存池  
@@ -99,7 +123,7 @@ int main(void)
 	show_sdcard_info();	//打印SD卡相关信息
 	exfuns_init();							//为fatfs相关变量申请内存				 
   	f_mount(fs[0],"0:",1);                  //挂载sd卡到fatfs系统中
-
+    
   	while(exf_getfree("0",&total,&free))	//得到SD卡的总容量和剩余容量
 	{
 		main_printf("SD Card Fatfs Error!");
@@ -108,7 +132,15 @@ int main(void)
 	}	
     main_printf("SD Total Size:%d MB\n",(total>>10));
     main_printf("SD  Free Size: %d    MB\n",(free>>10));
-
+    if(font_init() == 0)
+    {
+        uart_printf("open font succcse\n");
+    }
+    else
+    {
+        uart_printf("open font fail\n");
+    }
+    LCD_Init(1);//初始化5.0寸大屏
     OSInit(&err);    /* Init uC/OS-III.xqy会将hook函数指针清零                                      */
     main_printf("初始化hook函数\n");
     //App_OS_SetAllHooks();
@@ -140,7 +172,8 @@ static  void  AppTaskStart (void *p_arg)
     OS_ERR      err;
     u32 key;
     u32 ret;
-		(void)p_arg;//除编译警告
+	(void)p_arg;//除编译警告
+	delay_init(168);		  //初始化延时函数//系统systick都在这里初始化	
 #if OS_CFG_STAT_TASK_EN > 0u
     OSStatTaskCPUUsageInit(&err);                               /* Compute CPU capacity with no task running            */
 #endif
@@ -193,7 +226,7 @@ static  void  AppTaskStart (void *p_arg)
                           OS_OPT_TIME_HMSM_STRICT,
                           &err);
         ret = key_read(&key);
-        if(ret>0)
+        if(key>0)
         {   
             disp_keyvalue(key);
         }
@@ -212,35 +245,54 @@ static  void  SystemTaskStart (void *p_arg)
         //drv_key_scan();//按键的IO口和屏的PE有冲突了，所以暂时不用按键
        // dev_key_task();
         KEY_Scan(0); 
-        OSTimeDlyHMSM(0u, 0u, 0u, 40u,
+        OSTimeDlyHMSM(0u, 0u, 0u, 50u,
                           OS_OPT_TIME_HMSM_STRICT,
                           &err);
     }
 }
-extern u8 FileList[128][13];
+extern u8 FileList[50][50];
 extern AudioPlay_Info AudioPlayInfo;
+extern u8* const father;
+
 static  void  MusicTaskStart(void *p_arg)
 {
     
     OS_ERR      err;
     u16 num,cnt = 0;
-    char dir_x[20];
+    s32 ret;
+    char dir_x[50];
     u8 i;
     (void)p_arg;
     num = ReadDir("music");
     main_printf("进入音乐播放任务\n");
     for(i=0;i<num;i++)
     {
-        main_printf("%d.%s\n",i,FileList[i]);
+        //main_printf("%d.%s\n",i,(u8 *)FileList[i]);
+        lcd_show(i,4,(u8 *)FileList[i],24,1);
+        delayms(20);
     }
+    music_play_init(num);//初始化歌曲播放控制结构体
     AudioPlay_Init();
 	while(1)
 	{
+	    uart_printf("内存 used= %d\n",my_mem_perused(0));
 		sprintf(dir_x,"%s/%s","music",FileList[cnt]);
-        main_printf("\r\n即将播放 --%s--\r\n",dir_x);
-		AudioPlayFile((u8 *)"music/陈信喆 - 我又想你了.mp3");
-		
-		#if 0 /*xqy 2018-5-17*/
+		AudioPlayFile(dir_x);
+		ret = AudioPlayInfo.PlayRes;//一首歌曲播放完成了
+		if(ret == AudioPlay_Exit)
+		{
+		    break;
+		}
+		else
+		{
+		    cnt = music_ctl.music_num;
+		}
+		#if 0 /*xqy 2018-6-18*/
+		if(music_ctl.music_num == num-1)
+		{
+		    Lcd_ColorBox(0,0,480,854,0X07FF);
+		    lcd_show_text(0,50,father,24,1);
+		}
 		if(AudioPlayInfo.PlayRes == AudioPlay_Next)
 		{
 			cnt ++;
@@ -256,7 +308,6 @@ static  void  MusicTaskStart(void *p_arg)
 		}
 		#endif
 	}
-    //mp3_play_song("music/无所谓 (Live).mp3");
     OSTaskDel(&MusicTaskStartTCB, &err);
     main_printf("删除音乐任务控制块结束err==%d\n",err);
 

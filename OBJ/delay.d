@@ -3,9 +3,9 @@
 ..\obj\delay.o: ..\SYSTEM\sys\sys.h
 ..\obj\delay.o: ..\USER\stm32f4xx.h
 ..\obj\delay.o: ..\CORE\core_cm4.h
-..\obj\delay.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\delay.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\delay.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\delay.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\delay.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\delay.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\delay.o: ..\CORE\core_cm4_simd.h
 ..\obj\delay.o: ..\USER\system_stm32f4xx.h
 ..\obj\delay.o: ..\USER\stm32f4xx_conf.h
@@ -37,12 +37,12 @@
 ..\obj\delay.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\delay.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 ..\obj\delay.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III\includes.h
-..\obj\delay.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdio.h
-..\obj\delay.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\string.h
-..\obj\delay.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\ctype.h
-..\obj\delay.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdlib.h
-..\obj\delay.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdarg.h
-..\obj\delay.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\math.h
+..\obj\delay.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
+..\obj\delay.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\string.h
+..\obj\delay.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\ctype.h
+..\obj\delay.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdlib.h
+..\obj\delay.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdarg.h
+..\obj\delay.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\math.h
 ..\obj\delay.o: ..\UCOSIII\uCOS-III\Source\os.h
 ..\obj\delay.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III\os_cfg.h
 ..\obj\delay.o: ..\UCOSIII\uC-CPU\cpu_core.h

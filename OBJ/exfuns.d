@@ -1,11 +1,11 @@
 ..\obj\exfuns.o: ..\FATFS\exfuns\exfuns.c
-..\obj\exfuns.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\string.h
+..\obj\exfuns.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\string.h
 ..\obj\exfuns.o: ..\FATFS\exfuns\exfuns.h
 ..\obj\exfuns.o: ..\USER\stm32f4xx.h
 ..\obj\exfuns.o: ..\CORE\core_cm4.h
-..\obj\exfuns.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\exfuns.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\exfuns.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\exfuns.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\exfuns.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\exfuns.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\exfuns.o: ..\CORE\core_cm4_simd.h
 ..\obj\exfuns.o: ..\USER\system_stm32f4xx.h
 ..\obj\exfuns.o: ..\USER\stm32f4xx_conf.h
@@ -42,5 +42,5 @@
 ..\obj\exfuns.o: ..\FATFS\exfuns\fattester.h
 ..\obj\exfuns.o: ..\MALLOC\malloc.h
 ..\obj\exfuns.o: ..\SYSTEM\usart\usart.h
-..\obj\exfuns.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdio.h
+..\obj\exfuns.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
 ..\obj\exfuns.o: ..\SYSTEM\sys\sys.h

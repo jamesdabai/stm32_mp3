@@ -31,6 +31,11 @@ typedef enum
 	
 	AudioPlay_Exit,
 	AudioPlay_PlayEnd,
+	AudioPlay_Sigle_loop,//单曲循环，一直播同一首歌
+	AudioPlay_Sequential_loop,//顺序循环，
+	AudioPlay_Sigle,//单曲播放，只播放一首歌就停歌了
+	AudioPlay_Sequential,//顺序播放，到最后就停止播放了
+	
 }AudioPlayRes;
 
 typedef enum
@@ -55,6 +60,19 @@ typedef struct
 	volatile uint8_t Flags;
 }AudioPlay_Info;
 
+
+typedef struct
+{
+    u16 TotalSec;//歌曲总时间
+	u16 CurrentSec;//当前时间
+    u16  music_totle;//改文件夹下有多少歌曲
+    u16  music_num;//被选中的歌曲的编号
+    u16  curse_line_bak;//光标备份
+    u16  curse_row_bak;//光标备份
+    u8   music_play_sta;//播放状态
+}MUSIC_TRL;
+
+extern MUSIC_TRL music_ctl;//xqy
 extern AudioPlay_Info AudioPlayInfo;
 extern FIL AudioFile;
 extern uint32_t DualSine12bit[DAC_Buffer_Size];
@@ -73,6 +91,6 @@ void Play_Start(void);
 void Play_Stop(void);
 void Audio_StopPlay(void);
 
-void AudioPlayFile(char* path);
+s32 AudioPlayFile(char* path);
 
 #endif

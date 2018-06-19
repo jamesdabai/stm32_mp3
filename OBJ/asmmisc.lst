@@ -100,10 +100,11 @@ ARM Macro Assembler    Page 2
    67 00000016                 ENDP
    68 00000016         
    69 00000016                 END
-Command Line: --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\obj\asmmis
-c.d -o..\obj\asmmisc.o -I"C:\software xqy\keil\ARM\RV31\INC" -I"C:\software xqy
-\keil\ARM\CMSIS\Include" -I"C:\software xqy\keil\ARM\Inc\ST\STM32F4xx" --predef
-ine="__MICROLIB SETA 1" --list=..\obj\asmmisc.lst ..\MP3\real\arm\asmmisc.s
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\ob
+j\asmmisc.d -o..\obj\asmmisc.o -ID:\software_work\keil4\ARM\RV31\INC -ID:\softw
+are_work\keil4\ARM\CMSIS\Include -ID:\software_work\keil4\ARM\Inc\ST\STM32F4xx 
+--predefine="__MICROLIB SETA 1" --list=..\obj\asmmisc.lst ..\MP3\real\arm\asmmi
+sc.s
 
 
 

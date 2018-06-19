@@ -1,13 +1,13 @@
 ..\obj\dev_key.o: ..\HARDWARE\dev_key.c
-..\obj\dev_key.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdarg.h
-..\obj\dev_key.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdio.h
+..\obj\dev_key.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdarg.h
+..\obj\dev_key.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
 ..\obj\dev_key.o: ..\HARDWARE\dev_key.h
 ..\obj\dev_key.o: ..\SYSTEM\sys\sys.h
 ..\obj\dev_key.o: ..\USER\stm32f4xx.h
 ..\obj\dev_key.o: ..\CORE\core_cm4.h
-..\obj\dev_key.o: C:\software xqy\keil\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\dev_key.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\dev_key.o: C:\software xqy\keil\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\dev_key.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
+..\obj\dev_key.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
+..\obj\dev_key.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
 ..\obj\dev_key.o: ..\CORE\core_cm4_simd.h
 ..\obj\dev_key.o: ..\USER\system_stm32f4xx.h
 ..\obj\dev_key.o: ..\USER\stm32f4xx_conf.h
@@ -40,3 +40,4 @@
 ..\obj\dev_key.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 ..\obj\dev_key.o: ..\HARDWARE\dev_time.h
 ..\obj\dev_key.o: ..\HARDWARE\ddi.h
+..\obj\dev_key.o: ..\CORE\core_cm4.h

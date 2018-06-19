@@ -152,7 +152,11 @@ MP3DecInfo *AllocateBuffers(void)
 	mp3DecInfo_pointer = (MP3DecInfo *)malloc(sizeof(MP3DecInfo));
 #endif //USE_mymalloc		
 	if (!mp3DecInfo_pointer)
-		return 0;
+	{
+	    uart_printf("…Í«Îƒ⁄¥Ê ß∞‹\n");
+	    return 0;
+	}
+		
 	ClearBuffer(mp3DecInfo_pointer, sizeof(MP3DecInfo));
 #ifdef USE_mymalloc
 	sbi = (SubbandInfo *)     mymalloc(sizeof(SubbandInfo));
@@ -183,8 +187,11 @@ MP3DecInfo *AllocateBuffers(void)
 	mp3DecInfo_pointer->IMDCTInfoPS =       (void *)mi;
 	mp3DecInfo_pointer->SubbandInfoPS =     (void *)sbi;
 
-	if (!fh || !si || !sfi || !hi || !di || !mi || !sbi) {
+	if (!fh || !si || !sfi || !hi || !di || !mi || !sbi) 
+	{
+	    //uart_printf("…Í«Îƒ⁄¥Ê ß∞‹, Õ∑≈ used= %d\n",my_mem_perused(0));
 		FreeBuffers(mp3DecInfo_pointer);	/* safe to call - only frees memory that was successfully allocated */
+		//uart_printf("…Í«Îƒ⁄¥Ê ß∞‹, Õ∑≈ used= %d\n",my_mem_perused(0));
 		return 0;
 	}
 

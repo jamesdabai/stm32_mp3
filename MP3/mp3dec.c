@@ -253,10 +253,18 @@ int MP3GetNextFrameInfo(HMP3Decoder hMP3Decoder, MP3FrameInfo *mp3FrameInfo, uns
 	MP3DecInfo *mp3DecInfo = (MP3DecInfo *)hMP3Decoder;
 
 	if (!mp3DecInfo)
-		return ERR_MP3_NULL_POINTER;
+	{
+	    return ERR_MP3_NULL_POINTER;
+	}
+		
 
 	if (UnpackFrameHeader(mp3DecInfo, buf) == -1 || mp3DecInfo->layer != 3)
-		return ERR_MP3_INVALID_FRAMEHEADER;
+	{
+	    //uart_printf("2\n");
+	   // uart_printf("lay=%d\n",mp3DecInfo->layer);
+	    return ERR_MP3_INVALID_FRAMEHEADER;
+	}
+		
 
 	MP3GetLastFrameInfo(mp3DecInfo, mp3FrameInfo);
 

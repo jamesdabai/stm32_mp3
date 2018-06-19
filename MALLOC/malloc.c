@@ -88,14 +88,19 @@ u32 my_mem_malloc(u32 size)
     u32 nmemb;	//需要的内存块数  
 	u32 cmemb=0;//连续空内存块数
     u32 i;  
-    if(!mallco_dev.memrdy[memx])mallco_dev.init(memx);//未初始化,先执行初始化 
-    if(size==0)return 0XFFFFFFFF;//不需要分配
+    if(!mallco_dev.memrdy[memx])
+        mallco_dev.init(memx);//未初始化,先执行初始化 
+    if(size==0)
+        return 0XFFFFFFFF;//不需要分配
     nmemb=size/memblksize[memx];  	//获取需要分配的连续内存块数
-    if(size%memblksize[memx])nmemb++;  
+    if(size%memblksize[memx])
+        nmemb++;  
     for(offset=memtblsize[memx]-1;offset>=0;offset--)//搜索整个内存控制区  
     {     
-		if(!mallco_dev.memmap[memx][offset])cmemb++;//连续空内存块数增加
-		else cmemb=0;								//连续内存块清零
+		if(!mallco_dev.memmap[memx][offset])
+		    cmemb++;//连续空内存块数增加
+		else 
+		    cmemb=0;								//连续内存块清零
 		if(cmemb==nmemb)							//找到了连续nmemb个空内存块
 		{
             for(i=0;i<nmemb;i++)  					//标注内存块非空 
@@ -138,8 +143,13 @@ void myfree(void *ptr)
 {  
 	u32 offset;
 	u8 memx=0;//默认内部
-	if(ptr==NULL)return;//地址为0.  
+	if(ptr==NULL)
+	{
+	    uart_printf("释放内存失败\n");
+	    return;//地址为0.  
+	}
  	offset=(u32)ptr-(u32)mallco_dev.membase[memx];     
+ 	//uart_printf("free offset=%d\n",offset);
     my_mem_free(offset);	//释放内存      
 }  
 //分配内存(外部调用)
@@ -150,9 +160,20 @@ void *mymalloc(u32 size)
 {  
     u8 memx=0;//默认内部
     u32 offset;   
-	offset=my_mem_malloc(size);  	   	 	   
-    if(offset==0XFFFFFFFF)return NULL;  
-    else return (void*)((u32)mallco_dev.membase[memx]+offset);  
+    
+	offset=my_mem_malloc(size);  
+	//uart_printf("malloc offset=%d\n",offset);
+    if(offset==0XFFFFFFFF)
+    {
+        uart_printf("malloc fail\n");
+        return NULL;  
+    }
+    else
+    {
+        //uart_printf("ok\n");
+        return (void*)((u32)mallco_dev.membase[memx]+offset);  
+    }
+        
 }  
 //重新分配内存(外部调用)
 //memx:所属内存块

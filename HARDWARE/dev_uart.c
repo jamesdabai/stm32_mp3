@@ -32,11 +32,7 @@ int uart_printf(const char *fmt, ...)
          i++;
      }
      va_end(ap);
-	 //free(string);
-	 //OSTimeDlyHMSM(0u, 0u, 0u, 10u,
-     //                     OS_OPT_TIME_HMSM_STRICT,
-     //                     &err);
-     delayms(10);
+     //delayms(10);
      return i;
 }
 void printf_format(u8 *buf, u32 len)
@@ -54,11 +50,33 @@ void printf_format(u8 *buf, u32 len)
 		//dev_com_printf(buf[i]);
 		temp[0] = buf[i];
 		uart_printf("%02X ",temp[0]);
-		OSTimeDlyHMSM(0u, 0u, 0u, 4u,
-                          OS_OPT_TIME_HMSM_STRICT,
-                          &err);
 	}
 	uart_printf("\r\n");
+}
+void printf_format_bit(u8 *buf,u32 bit_num,u32 len)
+{
+    u32 i;
+    u8 temp;
+    u8 t1;
+    u8 bit_flag = 0;
+    for(i=0;i<len;i++)
+    {
+        temp = buf[i];
+        for(t1=0;t1<8;t1++)
+		{
+		    if(bit_flag>bit_num)
+		    {
+		        uart_printf("\n");
+		        bit_flag = 0;
+		    }
+			if(temp&0x80)
+			    uart_printf("%c",'*');
+			else
+			    uart_printf(" ");
+			temp<<=1;
+			bit_flag++;
+		}  	 
+    }
 }
 
 

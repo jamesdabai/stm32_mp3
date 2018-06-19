@@ -134,17 +134,12 @@ extern void disp_keyvalue(u32 key);
 //////////////////////////////暂时用开发板上的3个按键--代码//////////////////////
 #include "sys.h" 
 /*下面的方式是通过直接操作库函数方式读取IO*/
-#define KEY0 		GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4) //PE4
-#define KEY1 		GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)	//PE3 
-#define WK_UP 	GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)	//PA0
-
-#define key0 	    1
-#define key1	    2
-#define key_up      3
-#define key0_1	    4
-#define key0_up  	5
-#define key1_up     6
-
+#define key_right   1 
+#define key_down	2
+#define key_ok      3
+#define key_up	    4
+#define key_exit  	5
+#define key_left    6
 void KEY_Init(void);	//IO初始化
 u8 KEY_Scan(u8);  		//按键扫描函数	
 #endif

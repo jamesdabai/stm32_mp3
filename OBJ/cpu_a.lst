@@ -448,11 +448,11 @@ ARM Macro Assembler    Page 7
                        *************************************************
   282 00000034         
   283 00000034                 END
-Command Line: --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\obj\cpu_a.
-d -o..\obj\cpu_a.o -I"C:\software xqy\keil\ARM\RV31\INC" -I"C:\software xqy\kei
-l\ARM\CMSIS\Include" -I"C:\software xqy\keil\ARM\Inc\ST\STM32F4xx" --predefine=
-"__MICROLIB SETA 1" --list=..\obj\cpu_a.lst ..\UCOSIII\uC-CPU\ARM-Cortex-M4\Rea
-lView\cpu_a.asm
+Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\ob
+j\cpu_a.d -o..\obj\cpu_a.o -ID:\software_work\keil4\ARM\RV31\INC -ID:\software_
+work\keil4\ARM\CMSIS\Include -ID:\software_work\keil4\ARM\Inc\ST\STM32F4xx --pr
+edefine="__MICROLIB SETA 1" --list=..\obj\cpu_a.lst ..\UCOSIII\uC-CPU\ARM-Corte
+x-M4\RealView\cpu_a.asm
 
 
 
