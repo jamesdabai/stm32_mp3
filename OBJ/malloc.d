@@ -2,9 +2,9 @@
 ..\obj\malloc.o: ..\MALLOC\malloc.h
 ..\obj\malloc.o: ..\USER\stm32f4xx.h
 ..\obj\malloc.o: ..\CORE\core_cm4.h
-..\obj\malloc.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\malloc.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\malloc.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\malloc.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\malloc.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmInstr.h
+..\obj\malloc.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmFunc.h
 ..\obj\malloc.o: ..\CORE\core_cm4_simd.h
 ..\obj\malloc.o: ..\USER\system_stm32f4xx.h
 ..\obj\malloc.o: ..\USER\stm32f4xx_conf.h

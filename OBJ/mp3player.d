@@ -3,9 +3,9 @@
 ..\obj\mp3player.o: ..\SYSTEM\sys\sys.h
 ..\obj\mp3player.o: ..\USER\stm32f4xx.h
 ..\obj\mp3player.o: ..\CORE\core_cm4.h
-..\obj\mp3player.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\mp3player.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\mp3player.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\mp3player.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\mp3player.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmInstr.h
+..\obj\mp3player.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmFunc.h
 ..\obj\mp3player.o: ..\CORE\core_cm4_simd.h
 ..\obj\mp3player.o: ..\USER\system_stm32f4xx.h
 ..\obj\mp3player.o: ..\USER\stm32f4xx_conf.h
@@ -39,10 +39,10 @@
 ..\obj\mp3player.o: ..\SYSTEM\delay\delay.h
 ..\obj\mp3player.o: ..\HARDWARE\LED\led.h
 ..\obj\mp3player.o: ..\MALLOC\malloc.h
-..\obj\mp3player.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\string.h
+..\obj\mp3player.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\mp3player.o: ..\FATFS\src\ff.h
 ..\obj\mp3player.o: ..\FATFS\src\integer.h
 ..\obj\mp3player.o: ..\FATFS\src\ffconf.h
 ..\obj\mp3player.o: ..\SYSTEM\usart\usart.h
-..\obj\mp3player.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
+..\obj\mp3player.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\mp3player.o: ..\MP3\pub\mp3dec.h

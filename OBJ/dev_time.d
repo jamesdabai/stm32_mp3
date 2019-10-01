@@ -2,9 +2,9 @@
 ..\obj\dev_time.o: ..\SYSTEM\sys\sys.h
 ..\obj\dev_time.o: ..\USER\stm32f4xx.h
 ..\obj\dev_time.o: ..\CORE\core_cm4.h
-..\obj\dev_time.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\dev_time.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\dev_time.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\dev_time.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\dev_time.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmInstr.h
+..\obj\dev_time.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmFunc.h
 ..\obj\dev_time.o: ..\CORE\core_cm4_simd.h
 ..\obj\dev_time.o: ..\USER\system_stm32f4xx.h
 ..\obj\dev_time.o: ..\USER\stm32f4xx_conf.h

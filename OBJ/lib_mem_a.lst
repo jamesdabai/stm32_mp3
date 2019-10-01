@@ -443,11 +443,13 @@ ARM Macro Assembler    Page 7
   309 00000220         
   310 00000220         
   311 00000220                 END
-Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\ob
-j\lib_mem_a.d -o..\obj\lib_mem_a.o -ID:\software_work\keil4\ARM\RV31\INC -ID:\s
-oftware_work\keil4\ARM\CMSIS\Include -ID:\software_work\keil4\ARM\Inc\ST\STM32F
-4xx --predefine="__MICROLIB SETA 1" --list=..\obj\lib_mem_a.lst ..\UCOSIII\uC-L
-IB\Ports\ARM-Cortex-M4\RealView\lib_mem_a.asm
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=..\obj\lib_mem_a.d -o..\obj\lib_mem_a.o -I.\RTE\_LED -ID:\softw
+are_work\KEIL5\ARM\CMSIS\5.5.1\CMSIS\Core\Include -ID:\software_work\KEIL5\Keil
+\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__
+MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 527" --predefine="_RTE_ SE
+TA 1" --predefine="STM32F407xx SETA 1" --list=..\obj\lib_mem_a.lst ..\UCOSIII\u
+C-LIB\Ports\ARM-Cortex-M4\RealView\lib_mem_a.asm
 
 
 
@@ -673,4 +675,4 @@ m_a.asm
 m_a.asm
 
 18 symbols
-350 symbols in table
+353 symbols in table

@@ -2,166 +2,59 @@
 <body>
 <pre>
 <h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.27.1.0
+Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 11 11, 11, LIC=LJWBS-LTILJ-VHW87-EM76T-DIAFD-J85KR
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.27.1.0
+Toolchain Path:  D:\software_work\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.27.1.0
+Dialog DLL:      DCM.DLL V1.17.2.0
+Target DLL:      UL2CM3.DLL V1.162.15.0
+Dialog DLL:      TCM.DLL V1.36.1.0
+ 
 <h2>Project:</h2>
-C:\Users\mayn\Desktop\STM32\xiaqiyun_test\USER\LED.uvproj
-Project File Date:  06/17/2018
+D:\desktop_folder\work_study\STM32\xiaqiyun_test\USER\LED.uvprojx
+Project File Date:  10/01/2019
 
 <h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\software_work\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LED'
-compiling audio_mp3.c...
-..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
-    #define STM32F40_41xxx
-..\MP3\audio_mp3.c(224): warning:  #223-D: function "uart_printf" declared implicitly
-                uart_printf("打开失败\n");
-..\MP3\audio_mp3.c(228): warning:  #223-D: function "uart_printf" declared implicitly
-            uart_printf("打开成功\n");
-..\MP3\audio_mp3.c(258): warning:  #223-D: function "uart_printf" declared implicitly
-                    uart_printf("read error\n");
-..\MP3\audio_mp3.c(273): warning:  #223-D: function "uart_printf" declared implicitly
-                                uart_printf("没有找到同步帧\n");
-..\MP3\audio_mp3.c(290): warning:  #223-D: function "uart_printf" declared implicitly
-                                    uart_printf("跳出循环\n");
-..\MP3\audio_mp3.c(302): warning:  #223-D: function "uart_printf" declared implicitly
-                                    uart_printf("解码错误\n");
-..\MP3\audio_mp3.c(341): warning:  #223-D: function "music_end_process" declared implicitly
-            res = music_end_process();//一首歌曲播放完成了;
-..\MP3\audio_mp3.c(341): warning:  #188-D: enumerated type mixed with another type
-            res = music_end_process();//一首歌曲播放完成了;
-..\MP3\audio_mp3.c(343): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_mp3.c(343): warning:  #223-D: function "my_mem_perused" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_mp3.c: 11 warnings, 0 errors
-compiling audio_wav.c...
-..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
-    #define STM32F40_41xxx
-..\MP3\audio_wav.c(30): warning:  #223-D: function "uart_printf" declared implicitly
-                        uart_printf("音频格式==%04x\n",info->AudioFormat);
-..\MP3\audio_wav.c(66): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("数据偏移==%d\n",info->DataStartOffset);
-..\MP3\audio_wav.c(85): warning:  #223-D: function "uart_printf" declared implicitly
-                uart_printf("打开文件错误\n");
-..\MP3\audio_wav.c(114): warning:  #223-D: function "Audio_first_play" declared implicitly
-                Audio_first_play(Wav_File);
-..\MP3\audio_wav.c(122): warning:  #223-D: function "uart_printf" declared implicitly
-                        uart_printf("播放结束\n");
-..\MP3\audio_wav.c(147): warning:  #223-D: function "music_end_process" declared implicitly
-            res = music_end_process();//一首歌曲播放完成了;
-..\MP3\audio_wav.c(147): warning:  #188-D: enumerated type mixed with another type
-            res = music_end_process();//一首歌曲播放完成了;
-..\MP3\audio_wav.c(149): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_wav.c(149): warning:  #223-D: function "my_mem_perused" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_wav.c: 10 warnings, 0 errors
+compiling usart.c...
 linking...
-Program Size: Code=107244 RO-data=199116 RW-data=464 ZI-data=158544  
+Program Size: Code=106752 RO-data=199132 RW-data=464 ZI-data=158544  
 FromELF: creating hex file...
-"..\OBJ\ucosiii.axf" - 0 Error(s), 21 Warning(s).
-Load "..\\OBJ\\ucosiii.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
+"..\OBJ\ucosiii.axf" - 0 Error(s), 0 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.5.1.pack
+                ARM.CMSIS.5.5.1
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.2.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.13.0.pack
+                Keil.STM32F4xx_DFP.2.13.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_LED
+  D:\software_work\KEIL5\ARM\CMSIS\5.5.1\CMSIS\Core\Include
+  D:\software_work\KEIL5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.2.0
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
-y.c(1185): warning:  #223-D: function "uart_printf" declared implicitly
-              key_debug("key: %s ", &key_fun_tab[key&0x000000ff]);
-..\HARDWARE\dev_key.c(1411): warning:  #223-D: function "uart_printf" declared implicitly
-      uart_printf("写入一个键值=%d\n",key);
-..\HARDWARE\dev_key.c(1464): warning:  #223-D: function "delay_os" declared implicitly
-                delay_os(50);//delayms(10);//去抖动 
-..\HARDWARE\dev_key.c: 13 warnings, 0 errors
-linking...
-Program Size: Code=107220 RO-data=199116 RW-data=464 ZI-data=158544  
-FromELF: creating hex file...
-"..\OBJ\ucosiii.axf" - 0 Error(s), 30 Warning(s).
-Load "..\\OBJ\\ucosiii.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-y
-      Lcd_ColorBox(x,y,size+2,size+2,0X07FF);
-..\MP3\audio_common.c(86): warning:  #223-D: function "LCD_Draw_Circle" declared implicitly
-          LCD_Draw_Circle(x,y,r);
-..\MP3\audio_common.c(120): warning:  #223-D: function "uart_printf" declared implicitly
-              uart_printf("下一曲\n");
-..\MP3\audio_common.c(146): warning:  #940-D: missing return statement at end of non-void function "music_end_process"
-  }
-..\MP3\audio_common.c(102): warning:  #550-D: variable "ret" was set but never used
-      s32 ret = AudioPlay_OK;
-..\MP3\audio_common.c(150): warning:  #223-D: function "key_read" declared implicitly
-      key_read(&key);
-..\MP3\audio_common.c(165): warning:  #223-D: function "uart_printf" declared implicitly
-              uart_printf("下一曲\n");
-..\MP3\audio_common.c(179): warning:  #223-D: function "uart_printf" declared implicitly
-              uart_printf("上一曲\n");
-..\MP3\audio_common.c(184): warning:  #223-D: function "uart_printf" declared implicitly
-              uart_printf("确认\n");
-..\MP3\audio_common.c(249): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("配置结束\n");
-..\MP3\audio_common.c(278): warning:  #223-D: function "uart_printf" declared implicitly
-                    uart_printf("MP3播放\n");
-..\MP3\audio_common.c(289): warning:  #940-D: missing return statement at end of non-void function "AudioPlayFile"
-  }
-..\MP3\audio_common.c(271): warning:  #177-D: variable "ret" was declared but never referenced
-      s32 ret;
-..\MP3\audio_common.c(293): warning:  #177-D: variable "NVIC_InitStructure" was declared but never referenced
-        NVIC_InitTypeDef                                NVIC_InitStructure;
-..\MP3\audio_common.c(324): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("打开DAC使能\n");
-..\MP3\audio_common.c: 16 warnings, 0 errors
-compiling audio_mp3.c...
-..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
-    #define STM32F40_41xxx
-..\MP3\audio_mp3.c(223): warning:  #223-D: function "uart_printf" declared implicitly
-                uart_printf("打开失败\n");
-..\MP3\audio_mp3.c(227): warning:  #223-D: function "uart_printf" declared implicitly
-            uart_printf("打开成功\n");
-..\MP3\audio_mp3.c(257): warning:  #223-D: function "uart_printf" declared implicitly
-                    uart_printf("read error\n");
-..\MP3\audio_mp3.c(271): warning:  #223-D: function "music_end_process" declared implicitly
-                                res = music_end_process();//一首歌曲播放完成了;
-..\MP3\audio_mp3.c(271): warning:  #188-D: enumerated type mixed with another type
-                                res = music_end_process();//一首歌曲播放完成了;
-..\MP3\audio_mp3.c(272): warning:  #223-D: function "uart_printf" declared implicitly
-                                uart_printf("没有找到同步帧\n");
-..\MP3\audio_mp3.c(289): warning:  #223-D: function "uart_printf" declared implicitly
-                                    uart_printf("跳出循环\n");
-..\MP3\audio_mp3.c(300): warning:  #223-D: function "uart_printf" declared implicitly
-                                    uart_printf("解码错误\n");
-..\MP3\audio_mp3.c(337): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_mp3.c(337): warning:  #223-D: function "my_mem_perused" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_mp3.c: 11 warnings, 0 errors
-compiling audio_wav.c...
-..\USER\stm32f4xx.h(89): warning:  #47-D: incompatible redefinition of macro "STM32F40_41xxx"
-    #define STM32F40_41xxx
-..\MP3\audio_wav.c(30): warning:  #223-D: function "uart_printf" declared implicitly
-                        uart_printf("音频格式==%04x\n",info->AudioFormat);
-..\MP3\audio_wav.c(66): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("数据偏移==%d\n",info->DataStartOffset);
-..\MP3\audio_wav.c(84): warning:  #223-D: function "uart_printf" declared implicitly
-                uart_printf("打开文件错误\n");
-..\MP3\audio_wav.c(113): warning:  #223-D: function "Audio_first_play" declared implicitly
-                Audio_first_play(Wav_File);
-..\MP3\audio_wav.c(120): warning:  #223-D: function "music_end_process" declared implicitly
-                        res = music_end_process();//一首歌曲播放完成了
-..\MP3\audio_wav.c(120): warning:  #188-D: enumerated type mixed with another type
-                        res = music_end_process();//一首歌曲播放完成了
-..\MP3\audio_wav.c(121): warning:  #223-D: function "uart_printf" declared implicitly
-                        uart_printf("播放结束\n");
-..\MP3\audio_wav.c(140): warning:  #223-D: function "uart_printf" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_wav.c(140): warning:  #223-D: function "my_mem_perused" declared implicitly
-        uart_printf("内存 used= %d\n",my_mem_perused(0));
-..\MP3\audio_wav.c: 10 warnings, 0 errors
-linking...
-Program Size: Code=107144 RO-data=199116 RW-data=464 ZI-data=158544  
-FromELF: creating hex file...
-"..\OBJ\ucosiii.axf" - 0 Error(s), 67 Warning(s).
-Load "..\\OBJ\\ucosiii.axf" 
-Erase Done.
-Programming Done.
-Verify OK.

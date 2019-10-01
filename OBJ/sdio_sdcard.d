@@ -2,9 +2,9 @@
 ..\obj\sdio_sdcard.o: ..\HARDWARE\SDIO\sdio_sdcard.h
 ..\obj\sdio_sdcard.o: ..\USER\stm32f4xx.h
 ..\obj\sdio_sdcard.o: ..\CORE\core_cm4.h
-..\obj\sdio_sdcard.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\sdio_sdcard.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\sdio_sdcard.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\sdio_sdcard.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\sdio_sdcard.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmInstr.h
+..\obj\sdio_sdcard.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmFunc.h
 ..\obj\sdio_sdcard.o: ..\CORE\core_cm4_simd.h
 ..\obj\sdio_sdcard.o: ..\USER\system_stm32f4xx.h
 ..\obj\sdio_sdcard.o: ..\USER\stm32f4xx_conf.h
@@ -35,7 +35,7 @@
 ..\obj\sdio_sdcard.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\sdio_sdcard.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\sdio_sdcard.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\obj\sdio_sdcard.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\string.h
+..\obj\sdio_sdcard.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\sdio_sdcard.o: ..\SYSTEM\sys\sys.h
 ..\obj\sdio_sdcard.o: ..\SYSTEM\usart\usart.h
-..\obj\sdio_sdcard.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
+..\obj\sdio_sdcard.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

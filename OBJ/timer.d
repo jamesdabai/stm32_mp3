@@ -3,9 +3,9 @@
 ..\obj\timer.o: ..\SYSTEM\sys\sys.h
 ..\obj\timer.o: ..\USER\stm32f4xx.h
 ..\obj\timer.o: ..\CORE\core_cm4.h
-..\obj\timer.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\timer.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\timer.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\timer.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\timer.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmInstr.h
+..\obj\timer.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmFunc.h
 ..\obj\timer.o: ..\CORE\core_cm4_simd.h
 ..\obj\timer.o: ..\USER\system_stm32f4xx.h
 ..\obj\timer.o: ..\USER\stm32f4xx_conf.h

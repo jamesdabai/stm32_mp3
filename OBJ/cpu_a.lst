@@ -448,11 +448,19 @@ ARM Macro Assembler    Page 7
                        *************************************************
   282 00000034         
   283 00000034                 END
-Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\ob
-j\cpu_a.d -o..\obj\cpu_a.o -ID:\software_work\keil4\ARM\RV31\INC -ID:\software_
-work\keil4\ARM\CMSIS\Include -ID:\software_work\keil4\ARM\Inc\ST\STM32F4xx --pr
-edefine="__MICROLIB SETA 1" --list=..\obj\cpu_a.lst ..\UCOSIII\uC-CPU\ARM-Corte
-x-M4\RealView\cpu_a.asm
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=..\obj\cpu_a.d -o..\obj\cpu_a.o -I.\RTE\_LED -ID:\software_work
+\KEIL5\ARM\CMSIS\5.5.1\CMSIS\Core\Include -ID:\software_work\KEIL5\Keil\STM32F4
+xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__MICROLIB
+ SETA 1" --predefine="__UVISION_VERSION SETA 527" --predefine="_RTE_ SETA 1" --
+
+
+
+ARM Macro Assembler    Page 8 
+
+
+predefine="STM32F407xx SETA 1" --list=..\obj\cpu_a.lst ..\UCOSIII\uC-CPU\ARM-Co
+rtex-M4\RealView\cpu_a.asm
 
 
 
@@ -546,4 +554,4 @@ Symbol: CPU_WaitForInt
       At line 46 in file ..\UCOSIII\uC-CPU\ARM-Cortex-M4\RealView\cpu_a.asm
 Comment: CPU_WaitForInt used once
 10 symbols
-342 symbols in table
+345 symbols in table

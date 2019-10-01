@@ -1,7 +1,7 @@
 ..\obj\bsp.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\bsp.c
 ..\obj\bsp.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\bsp.h
-..\obj\bsp.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdio.h
-..\obj\bsp.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdarg.h
+..\obj\bsp.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\bsp.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 ..\obj\bsp.o: ..\UCOSIII\uC-CPU\ARM-Cortex-M4\RealView\cpu.h
 ..\obj\bsp.o: ..\UCOSIII\uC-CPU\cpu_def.h
 ..\obj\bsp.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\uCOS-III\cpu_cfg.h
@@ -16,9 +16,9 @@
 ..\obj\bsp.o: ..\FWLIB\inc\stm32f4xx_adc.h
 ..\obj\bsp.o: ..\USER\stm32f4xx.h
 ..\obj\bsp.o: ..\CORE\core_cm4.h
-..\obj\bsp.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\bsp.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\bsp.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\bsp.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\bsp.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmInstr.h
+..\obj\bsp.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmFunc.h
 ..\obj\bsp.o: ..\CORE\core_cm4_simd.h
 ..\obj\bsp.o: ..\USER\system_stm32f4xx.h
 ..\obj\bsp.o: ..\USER\stm32f4xx_conf.h

@@ -1,4 +1,4 @@
---cpu Cortex-M4.fp
+--cpu=Cortex-M4.fp
 "..\obj\main.o"
 "..\obj\stm32f4xx_it.o"
 "..\obj\system_stm32f4xx.o"
@@ -93,6 +93,6 @@
 "..\obj\fontupd.o"
 "..\obj\text.o"
 --library_type=microlib --strict --scatter "..\OBJ\ucosiii.sct"
---summary_stderr --info summarysizes --map
+--summary_stderr --info summarysizes --map --load_addr_map_info
 --info sizes --info unused --info veneers
 --list "..\OBJ\ucosiii.map" -o ..\OBJ\ucosiii.axf

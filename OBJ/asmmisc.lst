@@ -100,11 +100,13 @@ ARM Macro Assembler    Page 2
    67 00000016                 ENDP
    68 00000016         
    69 00000016                 END
-Command Line: --debug --xref --cpu=Cortex-M4.fp --apcs=interwork --depend=..\ob
-j\asmmisc.d -o..\obj\asmmisc.o -ID:\software_work\keil4\ARM\RV31\INC -ID:\softw
-are_work\keil4\ARM\CMSIS\Include -ID:\software_work\keil4\ARM\Inc\ST\STM32F4xx 
---predefine="__MICROLIB SETA 1" --list=..\obj\asmmisc.lst ..\MP3\real\arm\asmmi
-sc.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=..\obj\asmmisc.d -o..\obj\asmmisc.o -I.\RTE\_LED -ID:\software_
+work\KEIL5\ARM\CMSIS\5.5.1\CMSIS\Core\Include -ID:\software_work\KEIL5\Keil\STM
+32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__MICR
+OLIB SETA 1" --predefine="__UVISION_VERSION SETA 527" --predefine="_RTE_ SETA 1
+" --predefine="STM32F407xx SETA 1" --list=..\obj\asmmisc.lst ..\MP3\real\arm\as
+mmisc.s
 
 
 
@@ -136,4 +138,4 @@ Symbol: xmp3_MULSHIFT32
       At line 42 in file ..\MP3\real\arm\asmmisc.s
 Comment: xmp3_MULSHIFT32 used once
 3 symbols
-335 symbols in table
+338 symbols in table

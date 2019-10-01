@@ -1,9 +1,9 @@
 ..\obj\system_stm32f4xx.o: system_stm32f4xx.c
 ..\obj\system_stm32f4xx.o: stm32f4xx.h
 ..\obj\system_stm32f4xx.o: ..\CORE\core_cm4.h
-..\obj\system_stm32f4xx.o: D:\software_work\keil4\ARM\ARMCC\bin\..\include\stdint.h
-..\obj\system_stm32f4xx.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmInstr.h
-..\obj\system_stm32f4xx.o: D:\software_work\keil4\ARM\CMSIS\Include\core_cmFunc.h
+..\obj\system_stm32f4xx.o: D:\software_work\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\system_stm32f4xx.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmInstr.h
+..\obj\system_stm32f4xx.o: ..\UCOSIII\EvalBoards\ST\STM32F429II-SK\BSP\TrueSTUDIO\core_cmFunc.h
 ..\obj\system_stm32f4xx.o: ..\CORE\core_cm4_simd.h
 ..\obj\system_stm32f4xx.o: system_stm32f4xx.h
 ..\obj\system_stm32f4xx.o: stm32f4xx_conf.h
